@@ -1,0 +1,13 @@
+tensorflow
+torch
+transformers
+ultralytics
+pandas
+numpy
+scikit-learn
+surprise
+opencv-python
+streamlit
+beautifulsoup4
+spacy
+Pillow

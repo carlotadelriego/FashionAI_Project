@@ -1,5 +1,5 @@
 ###### PROYECTO CHATBOT MODA ######
-# Autora: Carlota Fernández del Riego
+# Autor: Carlota Fernández del Riego
 
 # Importamos las librerías necesarias
 import os
@@ -13,12 +13,12 @@ from spacy.lang.es.stop_words import STOP_WORDS
 import requests
 from bs4 import BeautifulSoup
 from collections import Counter
-from sklearn.feature_extraction.text import TfidfVectorizer  # Solo necesario para el TF-IDF
+from sklearn.feature_extraction.text import TfidfVectorizer 
 import tkinter as tk
 from tkinter import scrolledtext
 from PIL import Image, ImageTk
-from rasa.core.agent import Agent  # Rasa para el chatbot
-from transformers import pipeline, BertTokenizer, BertModel  # Para BERT y GPT
+from rasa.core.agent import Agent  
+from transformers import pipeline, BertTokenizer, BertModel
 import torch
 from torchvision import models, transforms
 
@@ -44,6 +44,7 @@ def get_message_rasa(message):
         return response[0]['text']
     else:
         return "No Rasa model loaded."
+
 
 # Web scraping
 urls = [
@@ -101,7 +102,7 @@ def normalize_tokens(tokenized_docs):
 normalized_documents = normalize_tokens(tokenized_documents)
 
 # 4. PROCESAR DOCUMENTOS PARA TF-IDF
-processed_documents = filtered_documents + normalized_documents  # Debe ser una lista de strings
+processed_documents = filtered_documents + normalized_documents  
 
 # 5. EXTRACCIÓN DE PALABRAS CLAVE CON TF-IDF
 vectorizer = TfidfVectorizer(stop_words='english', max_df=0.9, min_df=0.1)
@@ -130,7 +131,7 @@ def analyze_trends(texts):
         inputs = tokenizer(text, return_tensors="pt", max_length=512, truncation=True)
         outputs = bert_model(**inputs)
         embeddings = outputs.last_hidden_state.mean(dim=1)  # Obtener embeddings promedio
-        # Aquí iría la lógica para extraer información de tendencias a partir de los embeddings
+        
         relevant_words = []
         for i in range(5):
             word_idx = torch.argmax(embeddings[0]).item()
@@ -143,7 +144,7 @@ def analyze_trends(texts):
     return all_trend_info
 
 trend_info = analyze_trends(processed_documents)
-print(trend_info) # Imprimir la información de tendencias extraídas
+print(trend_info) 
 
 # CREATE A DATAFRAME WITH THE PROCESSED TEXT
 df = pd.DataFrame({
