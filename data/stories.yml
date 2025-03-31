@@ -1,0 +1,112 @@
+version: "3.1"
+
+stories:
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_happy
+
+- story: sad path 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+
+- story: sad path 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_goodbye
+
+- story: describe outfit image
+  steps:
+  - intent: describe_outfit_image
+  - action: action_describe_outfit_image
+
+- story: describe outfit preferences
+  steps:
+  - intent: describe_outfit_preferences
+  - action: action_describe_outfit_preferences
+
+- story: ask fashion trend
+  steps:
+  - intent: ask_fashion_trend
+  - action: action_get_fashion_trends
+
+- story: ask style suggestion
+  steps:
+  - intent: ask_style_suggestion
+  - action: action_give_style_suggestion
+
+- story: ask clothing combination
+  steps:
+  - intent: ask_clothing_combination
+  - action: action_suggest_clothing_combination
+
+- story: ask clothing color
+  steps:
+  - intent: ask_clothing_color
+  - action: action_suggest_clothing_color
+
+- story: ask clothing material
+  steps:
+  - intent: ask_clothing_material
+  - action: action_get_clothing_material
+
+- story: ask clothing price
+  steps:
+  - intent: ask_clothing_price
+  - action: action_get_clothing_price
+
+- story: greet and ask trend
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: ask_fashion_trend
+  - action: action_get_fashion_trends
+
+- story: greet and ask style
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: ask_style_suggestion
+  - action: action_give_style_suggestion
+
+- story: greet and ask combination
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: ask_clothing_combination
+  - action: action_suggest_clothing_combination
+
+- story: greet and ask color
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: ask_clothing_color
+  - action: action_suggest_clothing_color
+
+- story: greet and ask material
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: ask_clothing_material
+  - action: action_get_clothing_material
+
+- story: greet and ask price
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: ask_clothing_price
+  - action: action_get_clothing_price

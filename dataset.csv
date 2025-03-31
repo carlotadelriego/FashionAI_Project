@@ -1,0 +1,290 @@
+ruta,clase
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/hoodies/images-30.jpeg,hoodies
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/hoodies/Captura de pantalla 2025-03-10 a las 17.45.17.png,hoodies
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/hoodies/Captura de pantalla 2025-03-10 a las 17.29.24.png,hoodies
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/hoodies/Captura de pantalla 2025-03-10 a las 17.29.30.png,hoodies
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/hoodies/Captura de pantalla 2025-03-10 a las 17.29.10.png,hoodies
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/hoodies/Captura de pantalla 2025-03-10 a las 17.47.56.png,hoodies
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/hoodies/Captura de pantalla 2025-03-10 a las 17.48.48.png,hoodies
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/hoodies/images-24.jpeg,hoodies
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/accessories/Captura de pantalla 2025-03-10 a las 17.46.55.png,accessories
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/accessories/Captura de pantalla 2025-03-10 a las 17.45.05.png,accessories
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/accessories/Captura de pantalla 2025-03-10 a las 17.45.09.png,accessories
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/boots/Captura de pantalla 2025-03-10 a las 17.45.13.png,boots
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/boots/Captura de pantalla 2025-03-11 a las 13.13.37.png,boots
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/boots/Captura de pantalla 2025-03-10 a las 17.31.47.png,boots
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/boots/Captura de pantalla 2025-03-10 a las 17.32.16.png,boots
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/boots/Captura de pantalla 2025-03-10 a las 17.32.01.png,boots
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/boots/Captura de pantalla 2025-03-10 a las 17.32.11.png,boots
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/boots/Captura de pantalla 2025-03-10 a las 17.32.06.png,boots
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/boots/Captura de pantalla 2025-03-11 a las 13.13.41.png,boots
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/boots/Captura de pantalla 2025-03-10 a las 17.31.56.png,boots
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/boots/Captura de pantalla 2025-03-11 a las 13.12.31.png,boots
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sneakers/Captura de pantalla 2025-03-10 a las 17.33.24.png,sneakers
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sneakers/Captura de pantalla 2025-03-10 a las 17.32.58.png,sneakers
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sneakers/Captura de pantalla 2025-03-11 a las 13.12.10.png,sneakers
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sneakers/Captura de pantalla 2025-03-11 a las 13.13.50.png,sneakers
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sneakers/images-40.jpeg,sneakers
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sneakers/Captura de pantalla 2025-03-11 a las 13.12.15.png,sneakers
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sneakers/Captura de pantalla 2025-03-11 a las 13.13.54.png,sneakers
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sneakers/Captura de pantalla 2025-03-11 a las 13.12.19.png,sneakers
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sneakers/Captura de pantalla 2025-03-11 a las 13.13.58.png,sneakers
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sneakers/images-38.jpeg,sneakers
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sneakers/Captura de pantalla 2025-03-11 a las 13.12.24.png,sneakers
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sneakers/images-39.jpeg,sneakers
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sneakers/Captura de pantalla 2025-03-10 a las 17.32.26.png,sneakers
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sneakers/Captura de pantalla 2025-03-10 a las 17.45.20.png,sneakers
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sneakers/Captura de pantalla 2025-03-10 a las 17.33.02.png,sneakers
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sneakers/Captura de pantalla 2025-03-10 a las 17.33.16.png,sneakers
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sneakers/Captura de pantalla 2025-03-10 a las 17.33.13.png,sneakers
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sneakers/Captura de pantalla 2025-03-10 a las 17.32.52.png,sneakers
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sneakers/Captura de pantalla 2025-03-10 a las 17.32.44.png,sneakers
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.47.04.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-11 a las 13.15.51.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-11 a las 13.16.14.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/images-3.jpeg,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.47.13.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.46.52.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-11 a las 13.16.05.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.27.46.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-11 a las 13.16.10.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-11 a las 13.15.57.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.47.01.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.50.18.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.46.27.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.44.23.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.51.28.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.49.48.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.26.48.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.46.09.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.27.32.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.26.57.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.27.02.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.47.47.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.26.40.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.49.54.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.49.40.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.51.20.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.26.55.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.49.45.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.44.11.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.44.39.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.45.46.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.45.34.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.47.30.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.51.57.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.52.06.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.52.02.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.51.47.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.49.26.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.47.22.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-11 a las 13.16.19.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.26.31.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.49.18.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.49.30.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/shirts/Captura de pantalla 2025-03-10 a las 17.47.09.png,shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/dresses/images.jpeg,dresses
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/dresses/Captura de pantalla 2025-03-10 a las 17.19.35.png,dresses
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/dresses/Captura de pantalla 2025-03-10 a las 17.19.52.png,dresses
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/dresses/Captura de pantalla 2025-03-10 a las 17.20.01.png,dresses
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/dresses/Captura de pantalla 2025-03-10 a las 17.20.11.png,dresses
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/dresses/images-7.jpeg,dresses
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/dresses/Captura de pantalla 2025-03-10 a las 17.20.19.png,dresses
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/dresses/Captura de pantalla 2025-03-10 a las 17.20.33.png,dresses
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/dresses/Captura de pantalla 2025-03-10 a las 17.20.26.png,dresses
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/dresses/Captura de pantalla 2025-03-10 a las 17.49.34.png,dresses
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/dresses/Captura de pantalla 2025-03-10 a las 17.20.40.png,dresses
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/dresses/Captura de pantalla 2025-03-10 a las 17.21.02.png,dresses
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/dresses/Captura de pantalla 2025-03-10 a las 17.20.47.png,dresses
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/dresses/Captura de pantalla 2025-03-10 a las 17.21.10.png,dresses
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-10 a las 17.24.39.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-11 a las 13.11.37.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-11 a las 13.11.23.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-10 a las 17.48.42.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-11 a las 13.10.49.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-11 a las 13.08.29.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-10 a las 17.25.42.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-10 a las 17.44.46.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-11 a las 13.11.19.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-11 a las 13.11.27.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-10 a las 17.44.51.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-11 a las 13.11.32.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-10 a las 17.28.14.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-10 a las 17.28.00.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-11 a las 13.08.13.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-11 a las 13.11.41.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-10 a las 17.25.26.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-10 a las 17.48.37.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-10 a las 17.25.18.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Sin título.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-10 a las 17.24.59.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-10 a las 17.48.08.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-10 a las 17.51.05.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-10 a las 17.50.51.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-10 a las 17.24.49.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-10 a las 17.25.34.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-10 a las 17.48.33.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-11 a las 13.10.05.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/images-14.jpeg,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-10 a las 17.49.57.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-11 a las 13.10.20.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-11 a las 13.10.09.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-11 a las 13.10.35.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-10 a las 17.25.10.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-10 a las 17.45.55.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-10 a las 17.48.04.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-10 a las 17.25.03.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-11 a las 13.09.04.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-11 a las 13.10.31.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-11 a las 13.10.24.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-10 a las 17.51.32.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/images-15.jpeg,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-10 a las 17.48.13.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-10 a las 17.24.24.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-11 a las 13.10.56.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-10 a las 17.25.58.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-10 a las 17.26.09.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-10 a las 17.28.32.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/images-12.jpeg,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-11 a las 13.11.01.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-11 a las 13.10.44.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-10 a las 17.50.06.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-11 a las 13.09.59.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-11 a las 13.11.04.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-11 a las 13.11.10.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/images-13.jpeg,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-10 a las 17.28.08.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-10 a las 17.51.44.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-11 a las 13.10.52.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/t-shirts/Captura de pantalla 2025-03-10 a las 17.28.21.png,t-shirts
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/heels/Captura de pantalla 2025-03-10 a las 17.34.14.png,heels
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/heels/Captura de pantalla 2025-03-10 a las 17.34.03.png,heels
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/heels/images-47.jpeg,heels
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/heels/images-46.jpeg,heels
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/heels/Captura de pantalla 2025-03-10 a las 17.30.06.png,heels
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/heels/Captura de pantalla 2025-03-10 a las 17.33.56.png,heels
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/heels/images-41.jpeg,heels
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/heels/Captura de pantalla 2025-03-10 a las 17.30.10.png,heels
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/heels/images-43.jpeg,heels
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/heels/images-42.jpeg,heels
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/heels/Captura de pantalla 2025-03-10 a las 17.34.20.png,heels
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/heels/Captura de pantalla 2025-03-10 a las 17.29.58.png,heels
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/heels/Captura de pantalla 2025-03-10 a las 17.34.09.png,heels
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/heels/images-45.jpeg,heels
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/heels/images-44.jpeg,heels
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/heels/Captura de pantalla 2025-03-10 a las 17.34.25.png,heels
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-10 a las 17.21.34.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-11 a las 13.18.12.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-11 a las 13.17.57.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-11 a las 13.18.05.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-11 a las 13.17.41.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-10 a las 17.21.26.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-11 a las 13.18.00.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-11 a las 13.17.44.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-11 a las 13.18.16.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-11 a las 13.17.34.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-10 a las 17.21.42.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-11 a las 13.17.22.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-10 a las 17.44.08.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-10 a las 17.22.10.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-11 a las 13.17.27.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-10 a las 17.22.29.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-10 a las 17.22.01.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-10 a las 17.21.47.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-10 a las 17.51.36.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-10 a las 17.51.09.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-10 a las 17.22.18.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-10 a las 17.44.14.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-11 a las 13.17.17.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-10 a las 17.46.04.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-10 a las 17.51.24.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-11 a las 13.17.06.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-10 a las 17.45.50.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-10 a las 17.22.36.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-11 a las 13.16.50.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-11 a las 13.17.10.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-10 a las 17.49.21.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-10 a las 17.52.13.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-10 a las 17.22.47.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-10 a las 17.50.02.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-11 a las 13.17.49.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-11 a las 13.07.59.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-11 a las 13.08.08.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-11 a las 13.08.24.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-11 a las 13.08.18.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-10 a las 17.22.42.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-10 a las 17.50.10.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-10 a las 17.44.59.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/pants/Captura de pantalla 2025-03-10 a las 17.45.30.png,pants
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sweaters/Captura de pantalla 2025-03-10 a las 17.44.55.png,sweaters
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sweaters/Captura de pantalla 2025-03-10 a las 17.44.42.png,sweaters
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sweaters/Captura de pantalla 2025-03-10 a las 17.46.40.png,sweaters
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sweaters/Captura de pantalla 2025-03-10 a las 17.46.32.png,sweaters
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sweaters/Captura de pantalla 2025-03-10 a las 17.46.18.png,sweaters
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sweaters/Captura de pantalla 2025-03-10 a las 17.44.35.png,sweaters
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sweaters/Captura de pantalla 2025-03-10 a las 17.44.19.png,sweaters
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sweaters/Captura de pantalla 2025-03-10 a las 17.46.23.png,sweaters
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sweaters/Captura de pantalla 2025-03-10 a las 17.46.12.png,sweaters
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sweaters/Captura de pantalla 2025-03-10 a las 17.45.40.png,sweaters
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sweaters/Captura de pantalla 2025-03-10 a las 17.44.28.png,sweaters
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sweaters/Captura de pantalla 2025-03-10 a las 17.28.50.png,sweaters
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sweaters/Captura de pantalla 2025-03-10 a las 17.46.00.png,sweaters
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sweaters/Captura de pantalla 2025-03-10 a las 17.44.04.png,sweaters
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sweaters/Captura de pantalla 2025-03-10 a las 17.28.41.png,sweaters
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/sweaters/Captura de pantalla 2025-03-10 a las 17.46.49.png,sweaters
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/images-26.jpeg,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/Captura de pantalla 2025-03-11 a las 13.07.53.png,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/Captura de pantalla 2025-03-10 a las 17.23.26.png,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/images-10.jpeg,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/Captura de pantalla 2025-03-10 a las 17.46.46.png,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/images-11.jpeg,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/Captura de pantalla 2025-03-10 a las 17.24.02.png,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/images-2.jpeg,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/Captura de pantalla 2025-03-11 a las 13.08.04.png,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/Captura de pantalla 2025-03-10 a las 17.23.34.png,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/images-27.jpeg,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/images-31.jpeg,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/images-5.jpeg,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/Captura de pantalla 2025-03-10 a las 17.23.53.png,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/Captura de pantalla 2025-03-10 a las 17.23.47.png,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/05536031727-e1.jpg.webp,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/images-16.jpeg,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/images-36.jpeg,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/images-9.jpeg,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/images-20.jpeg,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/05070469807-e1.jpg,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/Captura de pantalla 2025-03-10 a las 17.50.45.png,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/Captura de pantalla 2025-03-10 a las 17.23.41.png,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/images-21.jpeg,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/images-8.jpeg,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/images-37.jpeg,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/images-17.jpeg,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/images-4.jpeg,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/Captura de pantalla 2025-03-10 a las 17.46.37.png,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/images-18.jpeg,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/images-22.jpeg,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/images-34.jpeg,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/images-35.jpeg,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/images-23.jpeg,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/Captura de pantalla 2025-03-10 a las 17.47.41.png,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/images-19.jpeg,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/Captura de pantalla 2025-03-11 a las 13.08.44.png,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/images-6.jpeg,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/Captura de pantalla 2025-03-10 a las 17.52.10.png,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/Captura de pantalla 2025-03-10 a las 17.47.25.png,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/Captura de pantalla 2025-03-10 a las 17.47.19.png,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/Captura de pantalla 2025-03-10 a las 17.23.05.png,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/chaqueta-ntretiempo-zara-nuevo-kkJC--460x637@MujerHoy.jpg.webp,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/images-32.jpeg,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/Captura de pantalla 2025-03-11 a las 13.08.35.png,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/Captura de pantalla 2025-03-10 a las 17.23.13.png,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/images-28.jpeg,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/Captura de pantalla 2025-03-10 a las 17.45.26.png,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/images-29.jpeg,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/Captura de pantalla 2025-03-11 a las 13.07.48.png,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/Captura de pantalla 2025-03-10 a las 17.51.52.png,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/images-33.jpeg,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/03736041802-e1.jpg,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/Captura de pantalla 2025-03-10 a las 17.47.34.png,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/images-25.jpeg,jackets
+/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset/jackets/Captura de pantalla 2025-03-10 a las 17.23.00.png,jackets

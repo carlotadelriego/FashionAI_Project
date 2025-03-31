@@ -1,0 +1,172 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - good afternoon
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - goodafternoon
+
+- intent: goodbye
+  examples: |
+    - by
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+
+- intent: mood_great
+  examples: |
+    - perfect
+    - great
+    - amazing
+    - feeling like a king
+    - wonderful
+    - I am feeling very good
+    - I am great
+    - I am amazing
+    - I am going to save the world
+    - super stoked
+    - extremely good
+    - so so perfect
+    - so good
+    - so perfect
+
+- intent: mood_unhappy
+  examples: |
+    - my day was horrible
+    - I am sad
+    - I don't feel very well
+    - I am disappointed
+    - super sad
+    - I'm so sad
+    - sad
+    - very sad
+    - unhappy
+    - not good
+    - not very good
+    - extremly sad
+    - so saad
+    - so sad
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+
+- intent: describe_outfit_image
+  examples: |
+    - Can you describe this outfit?
+    - Tell me about this outfit
+    - What does this outfit look like?
+    - Describe this outfit
+    - What is this outfit?
+    - What is this outfit like?
+    - What is this outfit about?
+
+- intent: describe_outfit_preferences
+  examples: |
+    - I want a casual outfit
+    - Show me a stylish outfit for a party
+    - I need a formal outfit for work
+    - I want a casual outfit for a date
+    - I need a casual outfit for a date
+    - I want a casual outfit for a party
+    - I need a formal outfit for a party
+    - I want a stylish outfit for work
+    - I need a formal outfit for a date
+    - I want a stylish outfit for a date
+
+- intent: ask_fashion_trend
+  examples: |
+    - What are the latest fashion trends?
+    - Tell me about current fashion trends
+    - What's trending in fashion right now?
+    - What are the fashion trends?
+    - What are the fashion trends for this season?
+    - What are the fashion trends for this year?
+
+- intent: ask_style_suggestion
+  examples: |
+    - What should I wear for a date?
+    - Suggest an outfit for a party
+    - What's a good outfit for work?
+    - What should I wear today?
+    - Give me some style advice
+    - What style should I wear?
+    - What clothes should I wear?
+
+- intent: ask_clothing_combination
+  examples: |
+    - What goes well with jeans?
+    - How do I style a black dress?
+    - Can you suggest a combination for a white shirt?
+    - What can I combine this with?
+    - What clothes can I wear together?
+    - What clothes go together?
+    - What clothes can I wear with this?
+
+- intent: ask_clothing_color
+  examples: |
+    - What color goes well with blue?
+    - What color should I wear?
+    - What color clothes should I wear?
+    - What colors go together?
+    - What color clothes go together?
+    - What colors can I wear together?
+
+- intent: ask_clothing_material
+  examples: |
+    - What material is this dress made of?
+    - What material is this shirt made of?
+    - What material is this jacket made of?
+    - What material is this skirt made of?
+    - What material is this pants made of?
+    - What material is this shoes made of?
+    - What material is this bag made of?
+
+- intent: ask_clothing_price
+  examples: |
+    - How much does this dress cost?
+    - How much is this shirt?
+    - How much is this jacket?
+    - How much is this skirt?
+    - How much is this pants?
+    - How much is this shoes?
+    - How much is this bag?

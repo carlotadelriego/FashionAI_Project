@@ -1,0 +1,17 @@
+{
+  "0": "affirm",
+  "1": "ask_clothing_color",
+  "2": "ask_clothing_combination",
+  "3": "ask_clothing_material",
+  "4": "ask_clothing_price",
+  "5": "ask_fashion_trend",
+  "6": "ask_style_suggestion",
+  "7": "bot_challenge",
+  "8": "deny",
+  "9": "describe_outfit_image",
+  "10": "describe_outfit_preferences",
+  "11": "goodbye",
+  "12": "greet",
+  "13": "mood_great",
+  "14": "mood_unhappy"
+}

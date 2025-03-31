@@ -1,0 +1,76 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - describe_outfit_image
+  - describe_outfit_preferences
+  - ask_fashion_trend
+  - ask_style_suggestion
+  - ask_clothing_combination
+  - ask_clothing_color
+  - ask_clothing_material
+  - ask_clothing_price
+
+actions:
+  - action_describe_outfit_image
+  - action_describe_outfit_preferences
+  - action_get_fashion_trends
+  - action_give_style_suggestion
+  - action_suggest_clothing_combination
+  - action_suggest_clothing_color
+  - action_get_clothing_material
+  - action_get_clothing_price
+
+responses:
+  utter_greet:
+  - text: "Hello! How are you?"
+
+  utter_cheer_up:
+  - text: "Here's something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_happy:
+  - text: "Great, keep it up!"
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_iamabot:
+  - text: "I'm a bot, powered by Rasa."
+
+  utter_ask_for_image:
+  - text: "Please, upload a image."
+
+  utter_ask_for_preferences:
+  - text: "What are your outfit preferences? (e.g., color, style)"
+
+  utter_fashion_trends:
+  - text: "The latest fashion trends are..." # Debes completar esto con la lógica de tu bot
+
+  utter_style_suggestion:
+  - text: "I suggest this outfit for..." # Debes completar esto con la lógica de tu bot
+
+  utter_clothing_combination:
+  - text: "You can combine this with..." # Debes completar esto con la lógica de tu bot
+
+  utter_clothing_color:
+  - text: "This color goes well with..." # Debes completar esto con la lógica de tu bot
+
+  utter_clothing_material:
+  - text: "This garment is made of..." # Debes completar esto con la lógica de tu bot
+
+  utter_clothing_price:
+  - text: "This garment costs..." # Debes completar esto con la lógica de tu bot
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
