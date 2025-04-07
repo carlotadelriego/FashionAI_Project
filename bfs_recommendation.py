@@ -1,39 +1,58 @@
-# bfs_recommendation.py
+import networkx as nx
+import matplotlib.pyplot as plt
+import streamlit as st
+import pandas as pd
 import numpy as np
-import pickle
 from sklearn.metrics.pairwise import cosine_similarity
-from collections import deque
 
-def construir_grafo_similitud(vectores, umbral=0.85):
-    grafo = {i: [] for i in range(len(vectores))}
-    for i in range(len(vectores)):
-        for j in range(i + 1, len(vectores)):
-            sim = cosine_similarity([vectores[i]], [vectores[j]])[0][0]
-            if sim >= umbral:
-                grafo[i].append(j)
-                grafo[j].append(i)
-    return grafo
+def construir_grafo_similitud(df, features, top_k=5):
+    G = nx.Graph()
 
-def guardar_grafo(grafo, ruta='grafo_similitud.pkl'):
-    with open(ruta, 'wb') as f:
-        pickle.dump(grafo, f)
+    for idx, row in df.iterrows():
+        G.add_node(idx, clase=row["clase"], estilo=row.get("estilo", None))
 
-def cargar_grafo(ruta='grafo_similitud.pkl'):
-    with open(ruta, 'rb') as f:
-        return pickle.load(f)
+    similarities = cosine_similarity(features)
 
-def bfs_recomendaciones(grafo, nodo_inicio, profundidad_max=2):
-    visitados = set()
-    cola = deque([(nodo_inicio, 0)])
-    resultado = []
+    for i in range(len(df)):
+        sim_indices = np.argsort(similarities[i])[::-1][1:top_k+1]
+        for j in sim_indices:
+            G.add_edge(i, j, weight=similarities[i][j])
 
-    while cola:
-        actual, profundidad = cola.popleft()
-        if actual in visitados or profundidad > profundidad_max:
-            continue
-        visitados.add(actual)
-        resultado.append(actual)
-        for vecino in grafo[actual]:
-            cola.append((vecino, profundidad + 1))
+    return G
 
-    return resultado[1:6]  
+
+def mostrar_grafo_streamlit(G, df):
+    st.subheader("Visualizing the similarity graph")
+
+    plt.figure(figsize=(12, 8))
+
+    # Posiciones para layout
+    pos = nx.spring_layout(G, seed=42)
+
+    # Colores únicos por clase
+    clases = df["clase"].unique()
+    color_map = {clase: plt.cm.tab20(i / len(clases)) for i, clase in enumerate(clases)}
+    node_colors = [color_map[df.loc[n]["clase"]] for n in G.nodes]
+
+    # Tamaño de los nodos según el grado
+    node_sizes = [300 + 100 * G.degree(n) for n in G.nodes]
+
+    # Pesos para las aristas
+    edge_weights = [G[u][v]['weight'] * 2 for u, v in G.edges]
+
+    nx.draw(
+        G, pos,
+        with_labels=False,
+        node_color=node_colors,
+        node_size=node_sizes,
+        edge_color="gray",
+        width=edge_weights,
+        alpha=0.85
+    )
+
+    # Agregar leyenda
+    for clase, color in color_map.items():
+        plt.plot([], [], marker='o', color=color, linestyle='', label=clase)
+    plt.legend(scatterpoints=1, frameon=False, labelspacing=1, loc='upper right')
+
+    st.pyplot(plt)

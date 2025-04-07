@@ -1,3 +1,4 @@
+#### Advanced machine learning (DONE) ####
 import os
 import pandas as pd
 import cv2
@@ -7,6 +8,7 @@ from tensorflow.keras import layers, models
 from tensorflow.keras.applications import VGG16, ResNet50
 from tensorflow.keras.utils import to_categorical
 from sklearn.preprocessing import LabelEncoder
+from sklearn.cluster import KMeans
 from sklearn.metrics.pairwise import cosine_similarity
 from surprise import SVD, Dataset, Reader
 from surprise.model_selection import cross_validate
@@ -14,7 +16,9 @@ import streamlit as st
 from PIL import Image
 import random
 import tempfile
-from bfs_recommendation import cargar_grafo, bfs_recomendaciones  # 🆕 NUEVO
+
+# Importar funciones del grafo
+from bfs_recommendation import construir_grafo_similitud, mostrar_grafo_streamlit
 
 # Ruta del dataset
 base_dir = '/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset'
@@ -72,9 +76,6 @@ print("✅ Features loaded successfully.")
 style_model = models.load_model("style_model.h5")
 print("✅ Style model loaded successfully.")
 
-# 🆕 Cargar el grafo de similitud
-grafo_sim = cargar_grafo()
-
 # Sistema de recomendación con SVD
 user_ratings = pd.DataFrame({
     "user_id": [random.randint(1, 100) for _ in range(100)],
@@ -88,7 +89,7 @@ svd_model = SVD()
 cross_validate(svd_model, data, cv=5)
 print("✅ Trained recommendation model.")
 
-# 🆕 Función para encontrar elementos similares usando BFS
+# Función para encontrar elementos similares
 def get_similar_items(uploaded_file):
     if uploaded_file is not None:
         with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as temp_file:
@@ -98,23 +99,24 @@ def get_similar_items(uploaded_file):
         input_img = preprocess_image(temp_path)
         input_img = np.expand_dims(input_img, axis=0)
 
-        # Extraer características usando el modelo base
+        # Extraer características de la imagen cargada usando el modelo de características
         feature_extractor = models.Model(inputs=fashion_model.input, outputs=fashion_model.layers[-2].output)
         features = feature_extractor.predict(input_img)
+
+        # Aplanar las características y calcular similitudes
         features_flattened = features.flatten().reshape(1, -1)
 
-        # 🧠 Calcular nodo más similar y ejecutar BFS
         similarities = cosine_similarity(features_flattened, X_features)
-        indice_inicio = np.argmax(similarities[0])
-        bfs_indices = bfs_recomendaciones(grafo_sim, indice_inicio, profundidad_max=2)
+        similar_indices = np.argsort(similarities[0])[::-1][:5]
 
         # Clasificación de estilo
         style_prediction = style_model.predict(input_img)
         style_label = np.argmax(style_prediction)
 
         os.remove(temp_path)
-        return df.iloc[bfs_indices], style_label
+        return df.iloc[similar_indices], style_label
     return pd.DataFrame(), None
+
 
 # Interfaz con Streamlit
 st.title("Fashion Recommendation System")
@@ -124,12 +126,21 @@ if uploaded_file:
     img = Image.open(uploaded_file)
     st.image(img, caption="Uploaded image", use_container_width=True)
 
-    st.write("Looking for similar clothes...")
+    st.write("🔎 Looking for similar clothes...")
     similar_items, style_label = get_similar_items(uploaded_file)
 
     style_dict = {0: "Casual", 1: "Formal", 2: "Sportive", 3: "Elegant", 4: "Urban"}
     style_name = style_dict.get(style_label, "Unknown")
-    st.write(f"Predicted style: {style_name}")
+    st.write(f"🧠 Predicted style: {style_name}")
     
     for _, item in similar_items.iterrows():
         st.image(item['ruta'], caption=f"Recommended: {item['clase']}", use_container_width=True)
+
+# Visualización del grafo
+st.subheader("📊 Visualization of Similarity Graph")
+
+# Mostrar grafo de similitud
+if st.checkbox("Show similarity graph"):
+    G = construir_grafo_similitud(df, X_features, top_k=5)
+    mostrar_grafo_streamlit(G, df)
+
