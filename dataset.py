@@ -15,6 +15,8 @@ import streamlit as st
 from PIL import Image
 import random
 import tempfile
+from bfs_recommendation import construir_grafo_similitud, cargar_grafo, bfs_recomendaciones
+
 
 # Ruta del dataset
 base_dir = '/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset'
@@ -32,6 +34,8 @@ df = pd.DataFrame(data, columns=["ruta", "clase"])
 df.to_csv("dataset.csv", index=False)
 print("✅ CSV dataset created successfully.")
 
+
+
 # Preprocesar imágenes
 def preprocess_image(image_path):
     img = cv2.imread(image_path)
@@ -47,6 +51,8 @@ for _, row in df.iterrows():
         processed_data.append([img, row["clase"]])
 
 print("✅ Images processed correctly.")
+
+
 
 # Convertir los datos a numpy arrays
 X = np.array([x[0] for x in processed_data], dtype=np.float32)  
@@ -76,11 +82,22 @@ model.fit(X, y, epochs=7, batch_size=32)
 model.save("fashion_model.h5")
 print("✅ Modelo CNN con VGG16 entrenado y guardado.")
 
+
 # Extraer características para clustering
 feature_extractor = models.Model(inputs=base_model.input, outputs=x)
 X_features = feature_extractor.predict(X)
 np.save("X_features.npy", X_features)  # Guardar características
 print("✅ Características extraídas y guardadas.")
+
+# Construir y guardar el grafo de similitud 
+if not os.path.exists("grafo_similitud.pkl"):
+    grafo = construir_grafo_similitud(X_features, umbral=0.85)
+    from bfs_recommendation import guardar_grafo
+    guardar_grafo(grafo)
+    print("✅ Grafo de similitud creado y guardado.")
+else:
+    print("Grafo ya existe. Saltando construcción.")
+
 
 # Aplicar K-Means y guardar clusters
 kmeans = KMeans(n_clusters=5, random_state=42)
@@ -88,6 +105,8 @@ labels = kmeans.fit_predict(X_features)
 df["cluster"] = labels
 df.to_csv("clustered_dataset.csv", index=False)
 print("✅ Clustering completed y guardado.")
+
+
 
 # Modelo de clasificación de estilos con ResNet50
 resnet_model = ResNet50(weights='imagenet', include_top=False, input_shape=(224, 224, 3))
@@ -103,6 +122,8 @@ style_model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=[
 style_model.save("style_model.h5")
 print("✅ Modelo de clasificación de estilos guardado.")
 
+
+
 # Sistema de recomendación con SVD
 user_ratings = pd.DataFrame({
     "user_id": [random.randint(1, 100) for _ in range(100)],
@@ -116,6 +137,10 @@ svd_model = SVD()
 cross_validate(svd_model, data, cv=5)
 print("✅ Trained recommendation model.")
 
+
+# Cargar el grafo de similitud
+grafo_sim = cargar_grafo()
+
 # Función para encontrar elementos similares
 def get_similar_items(uploaded_file):
     if uploaded_file is not None:
@@ -128,21 +153,23 @@ def get_similar_items(uploaded_file):
 
         # Extraer características de la imagen cargada
         features = feature_extractor.predict(input_img)
+        features_flattened = features.flatten().reshape(1, -1)
 
-        # Asegurarse de que las características tienen la misma dimensión
-        features_flattened = features.flatten().reshape(1, -1)  # Aplanar las características
-
-        # Calcular similitudes
+        # Buscar el nodo más cercano
         similarities = cosine_similarity(features_flattened, X_features)
-        similar_indices = np.argsort(similarities[0])[::-1][:5]
+        indice_inicio = np.argmax(similarities[0])
+
+        # Recomendaciones BFS
+        bfs_indices = bfs_recomendaciones(grafo_sim, indice_inicio, profundidad_max=2)
 
         # Clasificación de estilo
         style_prediction = style_model.predict(input_img)
         style_label = np.argmax(style_prediction)
 
         os.remove(temp_path)
-        return df.iloc[similar_indices], style_label
+        return df.iloc[bfs_indices], style_label
     return pd.DataFrame(), None
+
 
 
 # Interfaz con Streamlit
