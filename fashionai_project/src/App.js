@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import ChatbotUI from './ChatbotUIE'; // Asegúrate de tener la ruta correcta
+import ChatbotUI from './ChatbotUI'; // Asegúrate de tener la ruta correcta
 
 function App() {
   return (

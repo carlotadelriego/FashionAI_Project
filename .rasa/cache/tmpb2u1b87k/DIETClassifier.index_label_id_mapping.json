@@ -1,0 +1,10 @@
+{
+  "0": "ask_clothing_color",
+  "1": "ask_clothing_combination",
+  "2": "ask_clothing_material",
+  "3": "ask_clothing_price",
+  "4": "ask_fashion_trend",
+  "5": "describe_outfit_preferences",
+  "6": "goodbye",
+  "7": "greet"
+}

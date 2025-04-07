@@ -1,13 +1,27 @@
 version: "3.1"
 
 rules:
-
-- rule: Say goodbye anytime the user says goodbye
+- rule: Say hello
   steps:
-  - intent: goodbye
-  - action: utter_goodbye
+    - intent: greet
+    - action: utter_greet
 
-- rule: Say 'I am a bot' anytime the user challenges
+- rule: Say goodbye
   steps:
-  - intent: bot_challenge
-  - action: utter_iamabot
+    - intent: goodbye
+    - action: utter_goodbye
+
+- rule: Answer fashion trends
+  steps:
+    - intent: ask_fashion_trend
+    - action: utter_fashion_trends
+
+- rule: Suggest outfit combination
+  steps:
+    - intent: ask_clothing_combination
+    - action: utter_clothing_combination
+
+- rule: Respond to clothing color
+  steps:
+    - intent: ask_clothing_color
+    - action: utter_clothing_color

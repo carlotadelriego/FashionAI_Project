@@ -146,6 +146,7 @@ def analyze_trends(texts):
 trend_info = analyze_trends(processed_documents)
 print(trend_info) 
 
+
 # CREATE A DATAFRAME WITH THE PROCESSED TEXT
 df = pd.DataFrame({
     'Original': [' '.join([token.text for token in doc]) for doc in tokenized_documents],
