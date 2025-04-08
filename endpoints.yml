@@ -1,5 +1,30 @@
 # This file contains the different endpoints your bot can use.
 
+# Endpoint for the REST webhook to interact with the bot.
+rest:
+  url: "http://localhost:5005/webhooks/rest/webhook"
+
+# If you have custom actions, make sure to specify the action endpoint:
+#action_endpoint:
+#  url: "http://localhost:5055/webhook"
+
+# You can also configure a tracker store (e.g., Redis, MongoDB) or event brokers if needed:
+#tracker_store:
+#    type: redis
+#    url: localhost
+#    port: 6379
+#    db: 0
+#    password: "your_password"
+#    use_ssl: false
+
+# Event broker configuration (if you use one)
+#event_broker:
+#  url: localhost
+#  username: username
+#  password: password
+#  queue: queue
+
+
 # Server where the models are pulled from.
 # https://rasa.com/docs/rasa/model-storage#fetching-models-from-a-server
 
@@ -13,7 +38,6 @@
 #action_endpoint:
 #  url: "http://localhost:5055/webhook"
 
-# Tracker store which is used to store the conversations.
 # By default the conversations are stored in memory.
 # https://rasa.com/docs/rasa/tracker-stores
 

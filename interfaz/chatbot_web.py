@@ -30,4 +30,4 @@ def send_message():
         return jsonify({"response": "No response received from the bot."})
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5001)  # Cambia el puerto de 5000 a 5001 o cualquier otro puerto disponible
+    app.run(debug=True, port=5001) 

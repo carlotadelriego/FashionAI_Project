@@ -1,4 +1,4 @@
-#### Advanced machine learning (DONE) ####
+#### Advanced machine learning + Computer vision (DONE) ####
 import os
 import pandas as pd
 import cv2

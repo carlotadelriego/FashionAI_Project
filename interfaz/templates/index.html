@@ -6,6 +6,7 @@
     <title>Fashion Assistant Chatbot</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
+        /* Estilos para la interfaz de usuario */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             max-width: 600px;
@@ -28,14 +29,6 @@
             color: white;
             text-align: center;
         }
-        .logo-container {
-            margin-bottom: 10px;
-        }
-        .logo {
-            width: 60px;
-            height: 60px;
-            object-fit: contain;
-        }
         .header-text {
             font-size: 1.5rem;
             font-weight: 600;
@@ -55,11 +48,6 @@
             max-width: 75%;
             word-wrap: break-word;
             line-height: 1.4;
-            animation: fadeIn 0.3s ease;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
         }
         .user-message {
             background-color: #4285f4;
@@ -95,39 +83,6 @@
             border-radius: 24px;
             cursor: pointer;
             font-weight: 500;
-            transition: all 0.2s;
-        }
-        #send_button:hover {
-            background-color: #3367d6;
-            transform: translateY(-1px);
-        }
-        #send_button:disabled {
-            background-color: #9e9e9e;
-            cursor: not-allowed;
-            transform: none;
-        }
-        .typing-indicator {
-            display: inline-block;
-            padding: 10px 16px;
-            background-color: #e9e9eb;
-            border-radius: 18px;
-            margin-bottom: 12px;
-        }
-        .typing-dot {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: #666;
-            margin: 0 2px;
-            animation: typingAnimation 1.4s infinite ease-in-out;
-        }
-        .typing-dot:nth-child(1) { animation-delay: 0s; }
-        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
-        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-        @keyframes typingAnimation {
-            0%, 60%, 100% { transform: translateY(0); }
-            30% { transform: translateY(-5px); }
         }
     </style>
 </head>
@@ -173,7 +128,7 @@
 
             // Send message when button is clicked
             $('#send_button').click(sendMessage);
-            
+
             // Send message when Enter key is pressed
             $('#user_input').keypress(function(e) {
                 if (e.which === 13) {
@@ -192,33 +147,29 @@
                 
                 // Show typing indicator
                 showTypingIndicator();
-                
-                // Simulate bot response
-                setTimeout(() => {
-                    hideTypingIndicator();
-                    let botResponse = "I'm a fashion assistant. Ask me about styling tips, trends, or outfit suggestions!";
-                    
-                    // Enhanced fashion-themed responses
-                    const lowerMsg = userMessage.toLowerCase();
-                    if (/hello|hi|hey|greetings/i.test(lowerMsg)) {
-                        botResponse = "Hello fashion lover! Ready to upgrade your style today?";
-                    } else if (/bye|goodbye|see you/i.test(lowerMsg)) {
-                        botResponse = "Goodbye! Remember - confidence is the best accessory!";
-                    } else if (/name|who are you/i.test(lowerMsg)) {
-                        botResponse = "I'm your personal fashion assistant! I can help with styling tips and trend advice.";
-                    } else if (/help|support|assistance/i.test(lowerMsg)) {
-                        botResponse = "I can help with: outfit suggestions, color matching, seasonal trends, and styling tips. What do you need?";
-                    } else if (/trend|fashion|style/i.test(lowerMsg)) {
-                        botResponse = "Current trends include oversized blazers, monochrome outfits, and statement accessories. Need specific advice?";
-                    } else if (/outfit|wear|clothes/i.test(lowerMsg)) {
-                        botResponse = "For a great outfit, try pairing basics with one statement piece. What's the occasion?";
-                    } else if (/color|palette|match/i.test(lowerMsg)) {
-                        botResponse = "Great color combinations: navy & white, blush pink & gray, or olive green & tan.";
+
+                // Send the message to Rasa using POST request
+                $.ajax({
+                    url: "http://localhost:5005/webhooks/rest/webhook",  // URL de la API de Rasa
+                    type: "POST",  // Usar POST para enviar el mensaje
+                    contentType: "application/json",  // Asegurarse de que el tipo de contenido sea JSON
+                    data: JSON.stringify({ "message": userMessage }),  // Enviar el mensaje como JSON
+                    success: function(response) {
+                        hideTypingIndicator();
+                        if (response.length > 0) {
+                            const botResponse = response[0].text || "No response from bot.";
+                            addMessage('bot', botResponse);
+                        } else {
+                            addMessage('bot', "No response from the bot.");
+                        }
+                        $('#send_button').prop('disabled', false);
+                    },
+                    error: function() {
+                        hideTypingIndicator();
+                        addMessage('bot', "Sorry, there was an error. Please try again later.");
+                        $('#send_button').prop('disabled', false);
                     }
-                    
-                    addMessage('bot', botResponse);
-                    $('#send_button').prop('disabled', false);
-                }, 1500); // Simulate thinking time
+                });
             }
         });
     </script>
