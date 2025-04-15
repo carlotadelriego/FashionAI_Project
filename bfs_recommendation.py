@@ -5,18 +5,18 @@ import pandas as pd
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
-def construir_grafo_similitud(df, features, top_k=5):
+def construir_grafo_similitud(df, features, top_k=5): # top_k=5 es el número de vecinos más cercanos
     G = nx.Graph()
 
     for idx, row in df.iterrows():
         G.add_node(idx, clase=row["clase"], estilo=row.get("estilo", None))
 
-    similarities = cosine_similarity(features)
+    similarities = cosine_similarity(features) # similaridades entre todas las características de los elementos
 
     for i in range(len(df)):
-        sim_indices = np.argsort(similarities[i])[::-1][1:top_k+1]
+        sim_indices = np.argsort(similarities[i])[::-1][1:top_k+1] # Excluyendo el mismo elemento para no incluirlo
         for j in sim_indices:
-            G.add_edge(i, j, weight=similarities[i][j])
+            G.add_edge(i, j, weight=similarities[i][j]) # Agregar arista con el peso de la similitud
 
     return G
 
@@ -31,14 +31,14 @@ def mostrar_grafo_streamlit(G, df):
 
     # Colores únicos por clase
     clases = df["clase"].unique()
-    color_map = {clase: plt.cm.tab20(i / len(clases)) for i, clase in enumerate(clases)}
-    node_colors = [color_map[df.loc[n]["clase"]] for n in G.nodes]
+    color_map = {clase: plt.cm.tab20(i / len(clases)) for i, clase in enumerate(clases)} # colores únicos 
+    node_colors = [color_map[df.loc[n]["clase"]] for n in G.nodes] # Colores de los nodos según la clase para cada nodo
 
-    # Tamaño de los nodos según el grado
+    # Tamaño de los nodos según el grado del nodo para hacerlo más visual
     node_sizes = [300 + 100 * G.degree(n) for n in G.nodes]
 
-    # Pesos para las aristas
-    edge_weights = [G[u][v]['weight'] * 2 for u, v in G.edges]
+    # Pesos para las aristas de similitud
+    edge_weights = [G[u][v]['weight'] * 2 for u, v in G.edges] # 
 
     nx.draw(
         G, pos,

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fashion Assistant Chatbot 👗</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: url('/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/fondo.jpg') no-repeat center center fixed;
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#chat-container {
+  background: rgba(245, 245, 220, 0.9);
+  border-radius: 20px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 80vh;
+  margin: 0 auto;
+}
+
+.chat-header {
+  background: #e6d2b5;
+  color: #5d4037;
+  text-align: center;
+  padding: 15px;
+}
+
+.header-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.chat-description {
+  padding: 20px;
+  text-align: center;
+  color: #5d4037;
+  background-color: rgba(248, 241, 227, 0.7);
+  border-bottom: 1px solid #e6d2b5;
+}
+
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+}
+
+.feature {
+  background-color: #f5e6cc;
+  margin: 10px;
+  padding: 15px;
+  border-radius: 15px;
+  width: calc(33.33% - 20px);
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.feature h3 {
+  color: #5d4037;
+  margin-top: 0;
+}
+
+.feature p {
+  color: #7d6e63;
+  font-size: 0.9rem;
+}
+
+.instructions {
+  padding: 20px;
+  margin-top: auto;
+  background-color: rgba(248, 241, 227, 0.7);
+  border-top: 1px solid #e6d2b5;
+  text-align: center;
+  color: #5d4037;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  #chat-container {
+    width: 95%;
+    height: 85vh;
+  }
+  
+  .header-text {
+    font-size: 1.5rem;
+  }
+  
+  .feature {
+    width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 480px) {
+  .feature {
+    width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+<div id="chat-container">
+  <div class="chat-header">
+    <h1 class="header-text">Fashion Assistant 👗</h1>
+  </div>
+  
+  <div class="chat-description">
+    <p>Your personal assistant to explore the latest trends and find the perfect style for every occasion.</p>
+  </div>
+  
+  <div class="features">
+    <div class="feature">
+      <h3>Personalized Recommendations</h3>
+      <p>Receive fashion suggestions tailored to your personal style and preferences.</p>
+    </div>
+    <div class="feature">
+      <h3>Current Trends</h3>
+      <p>Stay up to date with the latest trends and styles in the fashion world.</p>
+    </div>
+  </div>
+  
+  <div class="instructions">
+    <p>Use the chat below to start chatting with Fashion Assistant and discover your ideal style.</p>
+  </div>
+</div>
+</body>
+</html>

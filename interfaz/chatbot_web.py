@@ -8,8 +8,14 @@ RASA_API_URL = "http://localhost:5005/webhooks/rest/webhook"
 def send_message_to_rasa(message):
     """Función para enviar un mensaje a la API de Rasa y obtener la respuesta"""
     payload = {"message": message}
-    response = requests.post(RASA_API_URL, json=payload)
-    return response.json()
+    try:
+        response = requests.post(RASA_API_URL, json=payload)
+        response.raise_for_status()  # Si la respuesta es 4xx o 5xx, se lanza una excepción
+        print(f"Respuesta de Rasa: {response.json()}")  # Imprimir la respuesta de Rasa para diagnosticar
+        return response.json()
+    except requests.exceptions.RequestException as e:
+        print(f"Error en la solicitud a Rasa: {e}")
+        return {"error": "Hubo un problema al conectarse con el servidor de Rasa."}
 
 @app.route("/")
 def home():
@@ -24,10 +30,15 @@ def send_message():
     
     print("Response from Rasa:", bot_response)  # Imprimir la respuesta de Rasa en consola
 
-    if bot_response:
-        return jsonify({"response": bot_response[0].get("text", "No response")})
+    # Verificar si la respuesta es válida y contiene la clave "text"
+    if "error" in bot_response:
+        return jsonify({"response": bot_response["error"]})
+
+    if bot_response and isinstance(bot_response, list) and len(bot_response) > 0:
+        text = bot_response[0].get("text", "No response")
+        return jsonify({"response": text})
     else:
         return jsonify({"response": "No response received from the bot."})
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5001) 
+    app.run(debug=True, port=5001)
