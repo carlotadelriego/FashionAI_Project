@@ -15,30 +15,40 @@ import streamlit as st
 from PIL import Image
 import random
 import tempfile
-from bfs_recommendation import construir_grafo_similitud, cargar_grafo, bfs_recomendaciones
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'modelo')))
 
+# Importaciones desde módulos propios
+from bfs_recommendation import construir_grafo_similitud, guardar_grafo, cargar_grafo, bfs_recomendaciones
+
+# Definir la ruta donde se guardarán todos los archivos
+modelos_dir = '/Users/carlotafernandez/Desktop/Code/FashionAI_Project/modelos'
+
+if not os.path.exists(modelos_dir):
+    os.makedirs(modelos_dir)
 
 # Ruta del dataset
 base_dir = '/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset'
 
-data = []
+data_img = []
 for class_name in os.listdir(base_dir):
     class_path = os.path.join(base_dir, class_name)
     if os.path.isdir(class_path):
         for filename in os.listdir(class_path):
             file_path = os.path.join(class_path, filename)
             if not filename.startswith("."):
-                data.append([file_path, class_name])
+                data_img.append([file_path, class_name])
 
-df = pd.DataFrame(data, columns=["ruta", "clase"])
-df.to_csv("dataset.csv", index=False)
+df = pd.DataFrame(data_img, columns=["ruta", "clase"])
+df.to_csv(os.path.join(modelos_dir, "dataset.csv"), index=False)
 print("✅ CSV dataset created successfully.")
-
-
 
 # Preprocesar imágenes
 def preprocess_image(image_path):
     img = cv2.imread(image_path)
+    if img is None:
+        return None
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     img = cv2.resize(img, (224, 224))
     img = img / 255.0
@@ -52,19 +62,17 @@ for _, row in df.iterrows():
 
 print("✅ Images processed correctly.")
 
-
-
 # Convertir los datos a numpy arrays
-X = np.array([x[0] for x in processed_data], dtype=np.float32)  
+X = np.array([x[0] for x in processed_data], dtype=np.float32)
 y = np.array([x[1] for x in processed_data])
 
 # Codificar etiquetas
 label_encoder = LabelEncoder()
 y = label_encoder.fit_transform(y)
-y = to_categorical(y)  
+y = to_categorical(y)
 
-# Guardar etiquetas para usarlas luego
-np.save("label_encoder_classes.npy", label_encoder.classes_)
+np.save(os.path.join(modelos_dir, "label_encoder_classes.npy"), label_encoder.classes_)
+print("✅ Label encoder classes saved.")
 
 # Modelo CNN con VGG16
 base_model = VGG16(weights="imagenet", include_top=False, input_shape=(224, 224, 3))
@@ -77,52 +85,45 @@ output_layer = layers.Dense(len(label_encoder.classes_), activation="softmax")(x
 model = models.Model(inputs=base_model.input, outputs=output_layer)
 model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
 
-# Entrenar y guardar el modelo
 model.fit(X, y, epochs=7, batch_size=32)
-model.save("fashion_model.h5")
+model.save(os.path.join(modelos_dir, "fashion_model.h5"))
 print("✅ Modelo CNN con VGG16 entrenado y guardado.")
-
 
 # Extraer características para clustering
 feature_extractor = models.Model(inputs=base_model.input, outputs=x)
 X_features = feature_extractor.predict(X)
-np.save("X_features.npy", X_features)  # Guardar características
+np.save(os.path.join(modelos_dir, "X_features.npy"), X_features)
 print("✅ Características extraídas y guardadas.")
 
-# Construir y guardar el grafo de similitud 
-if not os.path.exists("grafo_similitud.pkl"):
-    grafo = construir_grafo_similitud(X_features, umbral=0.85)
-    from bfs_recommendation import guardar_grafo
-    guardar_grafo(grafo)
+# Construir y guardar el grafo de similitud
+grafo_path = os.path.join(modelos_dir, "grafo_similitud.pkl")
+if not os.path.exists(grafo_path):
+    grafo = construir_grafo_similitud(df, X_features, top_k=5)
+    guardar_grafo(grafo, grafo_path)
     print("✅ Grafo de similitud creado y guardado.")
 else:
     print("Grafo ya existe. Saltando construcción.")
 
-
-# Aplicar K-Means y guardar clusters
+# Clustering
 kmeans = KMeans(n_clusters=5, random_state=42)
 labels = kmeans.fit_predict(X_features)
 df["cluster"] = labels
-df.to_csv("clustered_dataset.csv", index=False)
+df.to_csv(os.path.join(modelos_dir, "clustered_dataset.csv"), index=False)
 print("✅ Clustering completed y guardado.")
-
-
 
 # Modelo de clasificación de estilos con ResNet50
 resnet_model = ResNet50(weights='imagenet', include_top=False, input_shape=(224, 224, 3))
-resnet_model.trainable = False  
+resnet_model.trainable = False
 
-x = layers.GlobalAveragePooling2D()(resnet_model.output)
-x = layers.Dense(128, activation='relu')(x)
-output_layer_style = layers.Dense(5, activation='softmax')(x)  
+x_style = layers.GlobalAveragePooling2D()(resnet_model.output)
+x_style = layers.Dense(128, activation='relu')(x_style)
+output_layer_style = layers.Dense(5, activation='softmax')(x_style)
 
 style_model = models.Model(inputs=resnet_model.input, outputs=output_layer_style)
 style_model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
-style_model.save("style_model.h5")
+style_model.save(os.path.join(modelos_dir, "style_model.h5"))
 print("✅ Modelo de clasificación de estilos guardado.")
-
-
 
 # Sistema de recomendación con SVD
 user_ratings = pd.DataFrame({
@@ -132,14 +133,13 @@ user_ratings = pd.DataFrame({
 })
 
 reader = Reader(rating_scale=(1, 5))
-data = Dataset.load_from_df(user_ratings[["user_id", "item_id", "rating"]], reader)
+surprise_data = Dataset.load_from_df(user_ratings[["user_id", "item_id", "rating"]], reader)
 svd_model = SVD()
-cross_validate(svd_model, data, cv=5)
+cross_validate(svd_model, surprise_data, cv=5)
 print("✅ Trained recommendation model.")
 
-
-# Cargar el grafo de similitud
-grafo_sim = cargar_grafo()
+# Cargar grafo
+grafo_sim = cargar_grafo(grafo_path)
 
 # Función para encontrar elementos similares
 def get_similar_items(uploaded_file):
@@ -149,20 +149,18 @@ def get_similar_items(uploaded_file):
             temp_path = temp_file.name
 
         input_img = preprocess_image(temp_path)
-        input_img = np.expand_dims(input_img, axis=0)
+        if input_img is None:
+            return pd.DataFrame(), None
 
-        # Extraer características de la imagen cargada
+        input_img = np.expand_dims(input_img, axis=0)
         features = feature_extractor.predict(input_img)
         features_flattened = features.flatten().reshape(1, -1)
 
-        # Buscar el nodo más cercano
         similarities = cosine_similarity(features_flattened, X_features)
         indice_inicio = np.argmax(similarities[0])
 
-        # Recomendaciones BFS
         bfs_indices = bfs_recomendaciones(grafo_sim, indice_inicio, profundidad_max=2)
 
-        # Clasificación de estilo
         style_prediction = style_model.predict(input_img)
         style_label = np.argmax(style_prediction)
 
@@ -170,22 +168,20 @@ def get_similar_items(uploaded_file):
         return df.iloc[bfs_indices], style_label
     return pd.DataFrame(), None
 
-
-
-# Interfaz con Streamlit
-st.title("Fashion Recommendation System")
-uploaded_file = st.file_uploader("Upload an image of a garment", type=["jpg", "png"])
+# Interfaz Streamlit
+st.title("🧠 Fashion Recommendation System")
+uploaded_file = st.file_uploader("📤 Upload an image of a garment", type=["jpg", "png"])
 
 if uploaded_file:
     img = Image.open(uploaded_file)
     st.image(img, caption="Uploaded image", use_container_width=True)
 
-    st.write("Looking for similar clothes...")
+    st.write("🔎 Looking for similar clothes...")
     similar_items, style_label = get_similar_items(uploaded_file)
 
     style_dict = {0: "Casual", 1: "Formal", 2: "Deportivo", 3: "Elegante", 4: "Urbano"}
     style_name = style_dict.get(style_label, "Desconocido")
-    st.write(f"Predicted style: {style_name}")
-    
+    st.write(f"🎨 Predicted style: **{style_name}**")
+
     for _, item in similar_items.iterrows():
         st.image(item['ruta'], caption=f"Recommended: {item['clase']}", use_container_width=True)
