@@ -112,13 +112,10 @@ responses:
   utter_fallback:
     - text: "I'm sorry, I didn't quite understand that. Can you please rephrase?"
 
+  utter_fallback_image:
+    - text: "I couldn't process the image. Please try again."
+
+
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
-
-
-# Modificaciones clave:
-#Añadida la intención nlu_fallback: Para manejar entradas no reconocidas.
-#Añadido un slot image: Para almacenar la ruta o el enlace de la imagen cargada por el usuario.
-#Más variación en respuestas: Las respuestas de utter_clothing_color y utter_fashion_trends ahora tienen más variedad.
-#Agregar un slot de price y quantity: Si necesitas manejar precios o cantidades, puedes agregar estas entidades.

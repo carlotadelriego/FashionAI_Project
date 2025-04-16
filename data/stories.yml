@@ -79,7 +79,45 @@ stories:
     - intent: goodbye
     - action: utter_goodbye
 
+- story: Outfit for a date
+  steps: 
+    - intent: describe_outfit_preferences
+      entities:
+        - style: casual
+        - event: date
 
-##### Agregar historias más complejas que cubran interacciones que sigan múltiples pasos, como consultas sobre atuendos y precios, o tendencias seguidas de descripciones de atuendos.
-#Incluir un escenario de fallback para manejar respuestas incomprendidas o no clasificadas correctamente.
-#Crear historias interactivas que se adapten a los diferentes intereses de los usuarios (por ejemplo, moda para una cita, para el trabajo, para hacer ejercicio, etc.).
+- story: Outfit for an interview
+  steps: 
+    - intent: describe_outfit_preferences
+      entities:
+        - style: formal
+        - event: interview
+
+- story: Outfit for a wedding
+  steps: 
+    - intent: describe_outfit_preferences
+      entities:
+        - style: elegant
+        - event: wedding
+
+- story: Outfit for a party
+  steps: 
+    - intent: describe_outfit_preferences
+      entities:
+        - style: trendy
+        - event: party
+
+- story: Outfit for a vacation
+  steps: 
+    - intent: describe_outfit_preferences
+      entities:
+        - style: comfortable
+        - event: vacation
+
+- story: Outfit for a business meeting
+  steps: 
+    - intent: describe_outfit_preferences
+      entities:
+        - style: professional
+        - event: business meeting
+

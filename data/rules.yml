@@ -55,6 +55,3 @@ rules:
   steps:
     - intent: nlu_fallback
     - action: utter_default
-
-
-###### Añadir reglas para cubrir más intenciones como describe_outfit_preferences, ask_clothing_material, ask_clothing_price, etc. Incluir una regla de fallback para manejar casos en los que el bot no entienda una intención.

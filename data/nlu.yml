@@ -62,8 +62,28 @@ nlu:
     - How much does the [sweater](clothing_item) cost?
     - What’s the price for this [blouse](clothing_item)?
 
-  
+- intent: ask_outfit_recommendation
+  examples: |
+    - Can you recommend an outfit for a [wedding](event)?
+    - What should I wear for a [job interview](event)?
+    - Suggest an outfit for a [casual outing](event)
+    - What outfit is suitable for a [formal dinner](event)?
+    - What should I wear for a [beach party](event)?
+    - What should I wear for a [business meeting](event)?
+    - What should I wear for a [concert](event)?
 
+- intent: ask_outfit_match
+  examples: |
+    - Do these [shoes](clothing_item) match this [dress](clothing_item)?
+    - Can I wear these [pants](clothing_item) with this [top](clothing_item)?
+    - Are these [accessories](clothing_item) suitable for this [outfit](clothing_item)?
+    - Do these [colors](color) go well together?
+    - Is this [outfit](clothing_item) appropriate for a [wedding](event)?
 
-
-######## ask_outfit_recommendation, ask_clothing_size, y ask_outfit_match
+- intent: ask_clothing_size
+  examples: |
+    - What size is this [shirt](clothing_item)?
+    - How do I know my [dress](clothing_item) size?
+    - What size should I get for these [pants](clothing_item)?
+    - Is this [jacket](clothing_item) available in [medium](size)?
+    - What size is this [sweater](clothing_item)?
