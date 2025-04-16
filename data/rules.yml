@@ -25,3 +25,36 @@ rules:
   steps:
     - intent: ask_clothing_color
     - action: utter_clothing_color
+
+- rule: Recommend outfit based on style and event
+  steps:
+    - intent: describe_outfit_preferences
+    - action: utter_outfit_recommendation
+
+- rule: Answer clothing material inquiry
+  steps:
+    - intent: ask_clothing_material
+    - action: utter_clothing_material
+
+- rule: Provide clothing price
+  steps:
+    - intent: ask_clothing_price
+    - action: utter_clothing_price
+
+- rule: Provide clothing size
+  steps:
+    - intent: ask_clothing_size
+    - action: utter_clothing_size
+
+- rule: Match outfit items
+  steps:
+    - intent: ask_outfit_match
+    - action: utter_outfit_match
+
+- rule: Handle fallback
+  steps:
+    - intent: nlu_fallback
+    - action: utter_default
+
+
+###### Añadir reglas para cubrir más intenciones como describe_outfit_preferences, ask_clothing_material, ask_clothing_price, etc. Incluir una regla de fallback para manejar casos en los que el bot no entienda una intención.

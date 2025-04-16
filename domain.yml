@@ -16,12 +16,15 @@ intents:
   - ask_clothing_color
   - ask_clothing_material
   - ask_clothing_price
+  - nlu_fallback  # Intent for handling unrecognized messages
 
 entities:
   - color
   - style
   - event
   - clothing_item
+  - price
+  - quantity  # Optional: if you want to handle quantity-related questions
 
 slots:
   color:
@@ -44,7 +47,12 @@ slots:
     mappings:
       - type: from_entity
         entity: clothing_item
-
+  image:
+    type: text  # Stores image path or URL uploaded by the user
+  price:
+    type: float  # Optional: for storing price-related values
+  quantity:
+    type: integer  # Optional: for storing quantity values
 
 actions:
   - action_describe_outfit_image
@@ -55,35 +63,36 @@ actions:
   - action_suggest_clothing_color
   - action_get_clothing_material
   - action_get_clothing_price
+  - action_handle_fallback  # Optional: custom action for fallback handling
 
 responses:
   utter_greet:
-    - text: "Hello! How are you?"
+    - text: "Hello! How can I assist you today?"
 
   utter_goodbye:
-    - text: "Bye"
+    - text: "Bye! Have a great day!"
 
   utter_cheer_up:
     - text: "Here's something to cheer you up:"
       image: "https://i.imgur.com/nGF1K8f.jpg"
 
   utter_did_that_help:
-    - text: "Did that help you?"
+    - text: "Did that help you? Let me know if you need anything else!"
 
   utter_happy:
-    - text: "Great, keep it up!"
+    - text: "That's great to hear!"
 
   utter_iamabot:
-    - text: "I'm a bot, powered by Rasa."
+    - text: "I am a bot, powered by Rasa, here to help you with fashion advice."
 
   utter_ask_for_image:
-    - text: "Please, upload an image."
+    - text: "Please upload an image of the outfit you'd like to describe."
 
   utter_ask_for_preferences:
-    - text: "What are your outfit preferences? (e.g., color, style)"
+    - text: "What are your outfit preferences? (e.g., color, style, event)"
 
   utter_fashion_trends:
-    - text: "Right now, fashion trends include pastel colors, oversized jackets, and wide-leg pants."
+    - text: "Current fashion trends include pastel colors, oversized jackets, and wide-leg pants."
 
   utter_style_suggestion:
     - text: "A smart-casual outfit would be perfect for that occasion."
@@ -92,7 +101,7 @@ responses:
     - text: "You could pair that with a denim jacket and white sneakers."
 
   utter_clothing_color:
-    - text: "That color goes well with beige or white."
+    - text: "That color goes well with beige, white, or even black."
 
   utter_clothing_material:
     - text: "It's made of organic cotton."
@@ -100,6 +109,16 @@ responses:
   utter_clothing_price:
     - text: "That piece costs around $49.99."
 
+  utter_fallback:
+    - text: "I'm sorry, I didn't quite understand that. Can you please rephrase?"
+
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
+
+
+# Modificaciones clave:
+#Añadida la intención nlu_fallback: Para manejar entradas no reconocidas.
+#Añadido un slot image: Para almacenar la ruta o el enlace de la imagen cargada por el usuario.
+#Más variación en respuestas: Las respuestas de utter_clothing_color y utter_fashion_trends ahora tienen más variedad.
+#Agregar un slot de price y quantity: Si necesitas manejar precios o cantidades, puedes agregar estas entidades.

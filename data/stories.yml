@@ -9,3 +9,77 @@ stories:
     - action: utter_fashion_trends
     - intent: goodbye
     - action: utter_goodbye
+
+- story: Ask for fashion trends and then a clothing combination
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: ask_fashion_trend
+    - action: utter_fashion_trends
+    - intent: ask_clothing_combination
+    - action: utter_clothing_combination
+    - intent: goodbye
+    - action: utter_goodbye
+
+- story: Ask for outfit preferences for a date
+  steps:
+    - intent: describe_outfit_preferences
+      entities:
+        - style: casual
+        - event: date
+    - action: utter_outfit_recommendation
+    - intent: ask_clothing_color
+    - action: utter_clothing_color
+    - intent: goodbye
+    - action: utter_goodbye
+
+- story: Ask about clothing material and price
+  steps:
+    - intent: ask_clothing_material
+      entities:
+        - clothing_item: shirt
+    - action: utter_clothing_material
+    - intent: ask_clothing_price
+      entities:
+        - clothing_item: shirt
+    - action: utter_clothing_price
+    - intent: goodbye
+    - action: utter_goodbye
+
+- story: Ask for fashion trends, then describe outfit preferences
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: ask_fashion_trend
+    - action: utter_fashion_trends
+    - intent: describe_outfit_preferences
+      entities:
+        - style: formal
+        - event: work
+    - action: utter_outfit_recommendation
+    - intent: goodbye
+    - action: utter_goodbye
+
+- story: Ask for outfit recommendation and follow up with clothing combination
+  steps:
+    - intent: describe_outfit_preferences
+      entities:
+        - style: sporty
+        - event: workout
+    - action: utter_outfit_recommendation
+    - intent: ask_clothing_combination
+    - action: utter_clothing_combination
+    - intent: goodbye
+    - action: utter_goodbye
+
+- story: Handle fallback scenario
+  steps:
+    - intent: nlu_fallback
+    - action: utter_default
+    - intent: goodbye
+    - action: utter_goodbye
+
+
+##### Agregar historias más complejas que cubran interacciones que sigan múltiples pasos, como consultas sobre atuendos y precios, o tendencias seguidas de descripciones de atuendos.
+#Incluir un escenario de fallback para manejar respuestas incomprendidas o no clasificadas correctamente.
+#Crear historias interactivas que se adapten a los diferentes intereses de los usuarios (por ejemplo, moda para una cita, para el trabajo, para hacer ejercicio, etc.).

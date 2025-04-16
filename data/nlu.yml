@@ -6,42 +6,64 @@ nlu:
     - hello
     - hi
     - hey there
+    - greetings
+    - what's up
 
 - intent: goodbye
   examples: |
     - bye
     - goodbye
     - see you later
+    - take care
+    - until next time
 
 - intent: ask_clothing_color
   examples: |
     - What color goes well with [blue](color)?
     - What color should I wear with [red](color)?
     - What colors go with [green](color)?
+    - Which color is best with a [yellow](color) jacket?
+    - Does [purple](color) go with [white](color)?
 
 - intent: describe_outfit_preferences
   examples: |
     - I want a [casual](style) outfit for a [date](event)
     - I need a [formal](style) outfit for [work](event)
     - Show me something [stylish](style) for a [party](event)
+    - Recommend a [bohemian](style) outfit for a [wedding](event)
+    - Give me a [chic](style) outfit for a [brunch](event)
 
 - intent: ask_clothing_combination
   examples: |
     - What can I combine with a [white shirt](clothing_item)?
     - What goes well with [jeans](clothing_item)?
     - How can I style a [black dress](clothing_item)?
+    - What should I wear with these [sneakers](clothing_item)?
+    - Can I pair these [boots](clothing_item) with a [skirt](clothing_item)?
 
 - intent: ask_fashion_trend
   examples: |
     - What are the latest fashion trends?
     - What's trending in fashion?
+    - Tell me what's hot in fashion right now
+    - What are the popular trends for this season?
 
 - intent: ask_clothing_material
   examples: |
     - What material is this [shirt](clothing_item) made of?
     - What is the [dress](clothing_item) made from?
+    - Is this [coat](clothing_item) made of [wool](material)?
+    - What fabric is this [t-shirt](clothing_item)?
 
 - intent: ask_clothing_price
   examples: |
     - How much is this [jacket](clothing_item)?
     - What's the price of this [bag](clothing_item)?
+    - How much does the [sweater](clothing_item) cost?
+    - What’s the price for this [blouse](clothing_item)?
+
+  
+
+
+
+######## ask_outfit_recommendation, ask_clothing_size, y ask_outfit_match
