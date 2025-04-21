@@ -104,6 +104,8 @@ with open(html_path, 'r', encoding='utf-8') as f:
     html = f.read()
 components.html(html, height=700, scrolling=True)
 
+
+
 # Chatbot con Rasa
 st.markdown("## 💬 Chat with Fashion Virtual Assistant")
 user_input = st.text_input("Write your message:", key="chat_input")
@@ -115,6 +117,8 @@ if st.button("Send menssage"):
         st.write("🤖 Rasa response:")
         for message in response:
             st.write(message["text"])
+
+
 
 # Subida de imagen
 st.markdown("## 📸 Fashion recommendations with images")
