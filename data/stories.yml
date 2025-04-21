@@ -75,7 +75,6 @@ stories:
 - story: Handle fallback scenario
   steps:
     - intent: nlu_fallback
-    - action: utter_default
     - intent: goodbye
     - action: utter_goodbye
 
@@ -120,4 +119,3 @@ stories:
       entities:
         - style: professional
         - event: business meeting
-

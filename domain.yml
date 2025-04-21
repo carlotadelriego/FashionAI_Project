@@ -48,22 +48,52 @@ slots:
       - type: from_entity
         entity: clothing_item
   image:
-    type: text  # Stores image path or URL uploaded by the user
+    type: text  # Storing the image path/URL or any text input related to the image
+    mappings:
+      - type: from_text  # Manually handling the image via text input (path/URL)
   price:
     type: float  # Optional: for storing price-related values
+    mappings:
+      - type: from_entity
+        entity: price  # Map the price entity to this slot
   quantity:
-    type: integer  # Optional: for storing quantity values
+    type: float  # Change 'integer' to 'float' to handle quantity-related values
+    mappings:
+      - type: from_entity
+        entity: quantity  # Map the quantity entity to this slot
 
 actions:
-  - action_describe_outfit_image
-  - action_describe_outfit_preferences
-  - action_get_fashion_trends
-  - action_give_style_suggestion
-  - action_suggest_clothing_combination
-  - action_suggest_clothing_color
-  - action_get_clothing_material
-  - action_get_clothing_price
-  - action_handle_fallback  # Optional: custom action for fallback handling
+  - action_outfit_recommendation
+  - action_listen
+  - action_restart
+  - action_session_start
+  - action_deactivate_loop
+  - action_revert_fallback_events
+  - action_default_ask_affirmation
+  - action_default_ask_rephrase
+  - action_two_stage_fallback
+  - action_unlikely_intent
+  - action_back
+  - action_extract_slots
+  - utter_ask_for_image
+  - utter_ask_for_preferences
+  - utter_cheer_up
+  - utter_clothing_color
+  - utter_clothing_combination
+  - utter_clothing_material
+  - utter_clothing_price
+  - utter_did_that_help
+  - utter_fallback
+  - utter_fallback_image
+  - utter_fashion_trends
+  - utter_goodbye
+  - utter_greet
+  - utter_happy
+  - utter_iamabot
+  - utter_outfit_match
+  - utter_style_suggestion
+  - utter_clothing_size
+
 
 responses:
   utter_greet:
@@ -114,6 +144,16 @@ responses:
 
   utter_fallback_image:
     - text: "I couldn't process the image. Please try again."
+
+  utter_outfit_match:
+    - text: "Based on your preferences, I suggest a combination of a light blue shirt with dark jeans and white sneakers. Would you like to know more about this outfit?"
+
+  utter_outfit_recommendation:
+    - text: "I recommend you a stylish combination: a casual shirt with slim-fit jeans and some sneakers. How does that sound?"
+
+  utter_clothing_size:
+    - text: "The available sizes are S, M, L, and XL. Which one do you prefer?"
+
 
 
 session_config:

@@ -1,0 +1,36 @@
+{
+  "lookup": {
+    "rules": {
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"greet\"}}]": "utter_greet",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"greet\"}}, {\"prev_action\": {\"action_name\": \"utter_greet\"}, \"user\": {\"intent\": \"greet\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ask_clothing_material\"}}]": "utter_clothing_material",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ask_clothing_material\"}}, {\"prev_action\": {\"action_name\": \"utter_clothing_material\"}, \"user\": {\"intent\": \"ask_clothing_material\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ask_clothing_combination\"}}]": "utter_clothing_combination",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ask_clothing_combination\"}}, {\"prev_action\": {\"action_name\": \"utter_clothing_combination\"}, \"user\": {\"intent\": \"ask_clothing_combination\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ask_fashion_trend\"}}]": "utter_fashion_trends",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ask_fashion_trend\"}}, {\"prev_action\": {\"action_name\": \"utter_fashion_trends\"}, \"user\": {\"intent\": \"ask_fashion_trend\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"goodbye\"}}]": "utter_goodbye",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"goodbye\"}}, {\"prev_action\": {\"action_name\": \"utter_goodbye\"}, \"user\": {\"intent\": \"goodbye\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ask_clothing_price\"}}]": "utter_clothing_price",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ask_clothing_price\"}}, {\"prev_action\": {\"action_name\": \"utter_clothing_price\"}, \"user\": {\"intent\": \"ask_clothing_price\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ask_clothing_size\"}}]": "utter_clothing_size",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ask_clothing_size\"}}, {\"prev_action\": {\"action_name\": \"utter_clothing_size\"}, \"user\": {\"intent\": \"ask_clothing_size\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ask_clothing_color\"}}]": "utter_clothing_color",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ask_clothing_color\"}}, {\"prev_action\": {\"action_name\": \"utter_clothing_color\"}, \"user\": {\"intent\": \"ask_clothing_color\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ask_outfit_recommendation\"}}]": "utter_outfit_recommendation",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ask_outfit_recommendation\"}}, {\"prev_action\": {\"action_name\": \"utter_outfit_recommendation\"}, \"user\": {\"intent\": \"ask_outfit_recommendation\"}}]": "action_listen"
+    },
+    "rule_only_slots": [],
+    "rule_only_loops": [],
+    "rules_for_loop_unhappy_path": {},
+    "rules_not_in_stories": [
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ask_clothing_size\"}}]",
+      "predicting default action with intent session_start",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ask_outfit_recommendation\"}}]",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ask_outfit_recommendation\"}}, {\"prev_action\": {\"action_name\": \"utter_outfit_recommendation\"}, \"user\": {\"intent\": \"ask_outfit_recommendation\"}}]",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ask_clothing_size\"}}, {\"prev_action\": {\"action_name\": \"utter_clothing_size\"}, \"user\": {\"intent\": \"ask_clothing_size\"}}]",
+      "predicting default action with intent back",
+      "predicting default action with intent restart"
+    ]
+  }
+}

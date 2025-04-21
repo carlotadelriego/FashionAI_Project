@@ -14,7 +14,7 @@ import tensorflow as tf
 import requests  # Para hacer peticiones HTTP al servidor de Rasa
 
 # --- INTERFAZ STREAMLIT ---
-st.set_page_config(page_title="Fashion Assistant 👗", layout="wide")
+st.set_page_config(page_title="Fashion Virtual Assistant", layout="wide")
 
 # --- CARGA MODELOS Y DATOS ---
 base_dir = '/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset'
@@ -82,49 +82,54 @@ def get_similar_items(uploaded_file):
         return df.iloc[indices], style_label
     return pd.DataFrame(), None
 
+
 def send_message_to_rasa(message):
-    """Función para enviar un mensaje al chatbot de Rasa y obtener una respuesta."""
     url = "http://localhost:5005/webhooks/rest/webhook"  # URL del servidor de Rasa
     headers = {"Content-Type": "application/json"}
     payload = {"sender": "user", "message": message}
     response = requests.post(url, json=payload, headers=headers)
     
+    # Imprime la respuesta para depuración
+    print("Rasa response:", response.json())  # Para ver la respuesta en la consola de Streamlit
+    
     if response.status_code == 200:
         return response.json()
     else:
-        return [{"text": "Hubo un error en la comunicación con el chatbot."}]
+        return [{"text": "There was an error in communication with the chatbot."}]
+
 
 # Mostrar HTML visual
-html_path = "forma.html"
+html_path = "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/forma2.html"
 with open(html_path, 'r', encoding='utf-8') as f:
     html = f.read()
 components.html(html, height=700, scrolling=True)
 
 # Chatbot con Rasa
-st.markdown("## 💬 Chat con el Asistente de Moda")
-user_input = st.text_input("Escribe tu mensaje:", key="chat_input")
+st.markdown("## 💬 Chat with Fashion Virtual Assistant")
+user_input = st.text_input("Write your message:", key="chat_input")
 
-if user_input:
-    response = send_message_to_rasa(user_input)
-    st.write("🤖 Rasa dice:")
-    for message in response:
-        st.write(message["text"])
-
+# Botón para enviar el mensaje
+if st.button("Send menssage"):
+    if user_input:
+        response = send_message_to_rasa(user_input)
+        st.write("🤖 Rasa response:")
+        for message in response:
+            st.write(message["text"])
 
 # Subida de imagen
-st.markdown("## 📸 Sube una imagen para recomendaciones de moda")
-uploaded_file = st.file_uploader("Selecciona una imagen", type=["jpg", "png"])
+st.markdown("## 📸 Fashion recommendations with images")
+uploaded_file = st.file_uploader("Select an image", type=["jpg", "png"])
 
 if uploaded_file:
-    st.image(uploaded_file, caption="Tu imagen", use_container_width=True)
+    st.image(uploaded_file, caption="Your image", use_container_width=True)
 
-    st.write("🔍 Analizando imagen...")
+    st.write("🔍 Analizing image...")
     similar_items, style_label = get_similar_items(uploaded_file)
 
-    style_dict = {0: "Casual", 1: "Formal", 2: "Sportive", 3: "Elegant", 4: "Urban"}
-    st.success(f"✨ Estilo identificado: **{style_dict.get(style_label, 'Desconocido')}**")
+    style_dict = {0: "Casual", 1: "Formal", 2: "Sportive", 3: "Elegant", 4: "Urban", 5: "Vintage"}
+    st.success(f"✨ Identified style: **{style_dict.get(style_label, 'Unknown')}**")
 
-    st.write("### 🧥 Recomendaciones similares:")
+    st.write("### 🧥 Similar recommendations:")
     cols = st.columns(5)
     for i, (_, item) in enumerate(similar_items.iterrows()):
         with cols[i]:

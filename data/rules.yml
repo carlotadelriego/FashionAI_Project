@@ -26,11 +26,6 @@ rules:
     - intent: ask_clothing_color
     - action: utter_clothing_color
 
-- rule: Recommend outfit based on style and event
-  steps:
-    - intent: describe_outfit_preferences
-    - action: utter_outfit_recommendation
-
 - rule: Answer clothing material inquiry
   steps:
     - intent: ask_clothing_material
@@ -46,12 +41,8 @@ rules:
     - intent: ask_clothing_size
     - action: utter_clothing_size
 
-- rule: Match outfit items
-  steps:
-    - intent: ask_outfit_match
-    - action: utter_outfit_match
 
-- rule: Handle fallback
+- rule: Recommend outfit based on user request
   steps:
-    - intent: nlu_fallback
-    - action: utter_default
+    - intent: ask_outfit_recommendation
+    - action: utter_outfit_recommendation  

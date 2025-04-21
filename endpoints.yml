@@ -8,6 +8,9 @@ rest:
 action_endpoint:
   url: "http://localhost:5055/webhook"
 
+webhook:
+  url: "http://localhost:5005/webhooks/rest/webhook"
+
 # You can also configure a tracker store (e.g., Redis, MongoDB) or event brokers if needed:
 # tracker_store:
 #   type: redis
