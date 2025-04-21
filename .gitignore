@@ -35,6 +35,10 @@ Thumbs.db
 *.pb
 *.pt
 
+# Ignorar las imagenes en png y jpg
+*.png
+*.jpg
+
 # Otros binarios grandes o comprimidos
 *.zip
 *.tar.gz
