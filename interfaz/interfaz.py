@@ -16,6 +16,7 @@ import requests  # Para hacer peticiones HTTP al servidor de Rasa
 # --- INTERFAZ STREAMLIT ---
 st.set_page_config(page_title="Fashion Virtual Assistant", layout="wide")
 
+
 # --- CARGA MODELOS Y DATOS ---
 base_dir = '/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset'
 modelos_dir = '/Users/carlotafernandez/Desktop/Code/FashionAI_Project/modelos'
@@ -57,6 +58,7 @@ def cargar_modelos_y_datos():
     return df, fashion_model, style_model, X_features
 
 df, fashion_model, style_model, X_features = cargar_modelos_y_datos()
+
 
 # --- FUNCIONES ---
 def get_similar_items(uploaded_file):
@@ -103,7 +105,6 @@ html_path = "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/for
 with open(html_path, 'r', encoding='utf-8') as f:
     html = f.read()
 components.html(html, height=700, scrolling=True)
-
 
 
 # Chatbot con Rasa
