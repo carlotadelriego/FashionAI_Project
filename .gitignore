@@ -1,0 +1,43 @@
+# Ignorar entornos virtuales (como rasa-uie)
+rasa-uie/
+venv/
+env/
+.rasa/
+
+# Modelos y archivos grandes
+*.h5
+*.tflite
+*.dylib
+*.so
+
+# Archivos generados de Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Archivos de logs
+*.log
+
+# Archivos temporales / del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de configuración de Jupyter
+.ipynb_checkpoints/
+
+# Archivos de salida o datos generados
+/output/
+*.csv
+*.json
+
+# Git LFS (aunque los uses, mejor ignorar los grandes si > 100 MB)
+*.ckpt
+*.pb
+*.pt
+
+# Otros binarios grandes o comprimidos
+*.zip
+*.tar.gz
+*.tar
+*.7z
+*.rar
