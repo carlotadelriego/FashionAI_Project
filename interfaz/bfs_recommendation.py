@@ -1,3 +1,4 @@
+import streamlit as st
 import networkx as nx
 import numpy as np
 import pandas as pd
@@ -59,9 +60,6 @@ def bfs_recommendations(G, start_node, max_depth=2):
 
 
 # Función para mostrar la nube de puntos interactiva utilizando Plotly
-import plotly.graph_objects as go
-import networkx as nx
-
 def mostrar_nube_plotly(df, G, start_node):
     # Posiciones para los nodos generadas con el layout de NetworkX
     pos = nx.spring_layout(G, seed=42)

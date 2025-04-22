@@ -239,20 +239,39 @@ elif opcion == "🔗 Ver grafo de similitud":
     
     st.write("🛠️ Construyendo el grafo de similitud...")
     min_sim = st.slider("🔗 Similitud mínima para conectar", 0.0, 1.0, 0.4)
-    G = construir_grafo_similitud(df, X_features, top_k=top_k, min_sim=min_sim)
-    start_node = 0  # Ejemplo, puede ser cualquier nodo válido
+
+
+    # Ejemplo de DataFrame con información de las prendas
+    data = {
+        "clase": ["Accesories", "Boots", "Dresses", "Heels", "Hoodies", "Jackets", "Pants", "Shirts", "Sneakers", "Sweaters", "T-Shirts"],
+        "ruta": ["ruta_imagen_camisa.jpg", "ruta_imagen_pantalon.jpg", "ruta_imagen_zapatos.jpg", "ruta_imagen_chaqueta.jpg"]
+    }
+    df = pd.DataFrame(data)
+
+    # Generar las características de las prendas (deberían ser características reales)
+    features = np.array([[0.2, 0.3, 0.5], [0.4, 0.6, 0.7], [0.5, 0.2, 0.4], [0.6, 0.8, 0.9]])
+
+
+    # Construir el grafo de similitud
+    G = construir_grafo_similitud(df, features)
 
     # Mostrar el gráfico
-    fig = mostrar_nube_plotly(df, G, start_node)
+    fig = mostrar_nube_plotly(df, G, start_node=0)  # Comienza con el primer nodo
     selected = st.plotly_chart(fig, use_container_width=True)
 
     # Comprobar si se hizo clic en un nodo
     if selected and selected.selected_data:
         try:
-            punto = selected.selected_data["points"][0]  # Extraemos el primer punto seleccionado
-            clase, ruta = punto["customdata"]  # Recuperamos la clase y la ruta de la imagen
+            # Extraemos el primer punto seleccionado
+            punto = selected.selected_data["points"][0]
+            
+            # Recuperamos la clase y la ruta de la imagen del nodo
+            clase, ruta = punto["customdata"]
+            
+            # Mostrar detalles del nodo seleccionado
             st.markdown("### 👕 Detalles del nodo seleccionado")
             st.image(ruta, caption=f"Clase: {clase}", use_container_width=True)  # Muestra la imagen
             st.write(f"Clase de la prenda: {clase}")  # Información adicional sobre la prenda
         except Exception as e:
             st.warning("No se pudo obtener información del nodo seleccionado.")
+
