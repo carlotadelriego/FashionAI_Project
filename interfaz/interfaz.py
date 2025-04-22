@@ -16,6 +16,10 @@ from tensorflow.keras.utils import to_categorical
 import tensorflow as tf
 import matplotlib.pyplot as plt
 import networkx as nx
+import sys
+sys.path.append('/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/bfs_recommendation.py')
+from bfs_recommendation import construir_grafo_similitud, mostrar_grafo_streamlit
+
 
 # -----------------------------
 # ⚙️ CONFIGURACIÓN DE LA APP
@@ -43,7 +47,10 @@ st.markdown("""
 # 🎛️ MENÚ LATERAL
 # -----------------------------
 if 'opcion' not in st.session_state:
-    st.session_state.opcion = "💬 Chatear con el bot"
+    st.session_state.opcion = "🏠 Inicio"
+
+if st.sidebar.button("🏠 Inicio"):
+    st.session_state.opcion = "🏠 Inicio"
 
 if st.sidebar.button("💬 Chatear con el bot"):
     st.session_state.opcion = "💬 Chatear con el bot"
@@ -53,6 +60,7 @@ if st.sidebar.button("📸 Recomendación de prendas"):
 
 if st.sidebar.button("🔗 Ver grafo de similitud"):
     st.session_state.opcion = "🔗 Ver grafo de similitud"
+
 
 # -----------------------------
 # 📁 CARGA DE DATOS Y MODELOS
@@ -138,7 +146,7 @@ def send_message_to_rasa(message):
         st.error(f"Error de conexión con el chatbot: {e}")
         return [{"text": "❌ Error al conectar con el chatbot."}]
 
-def mostrar_grafo_streamlit(G, df):
+# def mostrar_grafo_streamlit(G, df):
     st.subheader("Visualizando el grafo de similitud")
 
     plt.figure(figsize=(12, 8))
@@ -172,7 +180,30 @@ def mostrar_grafo_streamlit(G, df):
 # -----------------------------
 opcion = st.session_state.opcion
 
-if opcion == "💬 Chatear con el bot":
+if opcion == "🏠 Inicio":
+    st.title("🛍️ Fashion Virtual Assistant")
+    st.markdown("""
+    Bienvenido/a al **Asistente Virtual de Moda**. Este proyecto combina inteligencia artificial con visión por computador y procesamiento del lenguaje natural para ofrecerte una experiencia interactiva en el mundo de la moda.  
+    Aquí podrás:
+
+    - 👗 **Chatear** con un asistente virtual entrenado para hablar sobre estilos, prendas, y recomendaciones personalizadas.
+    - 📸 **Subir imágenes** de ropa para recibir sugerencias de prendas similares.
+    - 🔍 **Visualizar un grafo de similitud** que relaciona prendas según sus características visuales.
+
+    ---
+    **¿Qué tecnologías usamos?**
+
+    - `Streamlit`: para crear esta interfaz web interactiva.
+    - `TensorFlow`: para los modelos de clasificación y estilo.
+    - `Rasa`: para el chatbot conversacional.
+    - `OpenCV` y `scikit-learn`: para procesamiento de imágenes y similitud.
+    - `NetworkX`: para construir y visualizar relaciones entre prendas.
+
+    ¡Explora las secciones del menú lateral y descubre cómo la inteligencia artificial puede transformar tu experiencia de moda!
+    """)
+
+
+elif opcion == "💬 Chatear con el bot":
     st.markdown("## 💬 Chat con el Asistente Virtual de Moda")
     user_input = st.text_input("Escribe tu mensaje:", key="chat_input")
     if st.button("Enviar"):
@@ -199,13 +230,13 @@ elif opcion == "📸 Recomendación de prendas":
         st.warning("Por favor, sube una imagen JPG o PNG válida.")
 
 elif opcion == "🔗 Ver grafo de similitud":
-    st.markdown("## 🔗 Grafo de Similitud")
-    G = nx.Graph()
-    for i in range(len(X_features)):
-        for j in range(i + 1, len(X_features)):
-            sim = cosine_similarity([X_features[i]], [X_features[j]])[0][0]
-            if sim > 0.5:
-                G.add_edge(i, j, weight=sim)
-    for i in range(len(X_features)):
-        G.nodes[i]['clase'] = df.iloc[i]['clase']
-    mostrar_grafo_streamlit(G, df)
+    st.markdown("## 🔗 Grafo de Similitud entre Prendas")
+    
+    top_k = st.slider("🔢 Número de conexiones por nodo (top_k)", 2, 10, 5)
+    nodo_inicio = st.number_input("🔍 Nodo inicial para subgrafo (opcional)", min_value=0, max_value=len(df)-1, step=1, value=0)
+    profundidad = st.slider("📏 Profundidad del subgrafo", 1, 3, 2)
+    
+    st.write("🛠️ Construyendo el grafo de similitud...")
+    G = construir_grafo_similitud(df, X_features, top_k=top_k)
+    
+    mostrar_grafo_streamlit(G, df, nodo_inicio=int(nodo_inicio))
