@@ -12,6 +12,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 from tensorflow.keras import models
 from tensorflow.keras.utils import to_categorical
 import tensorflow as tf
+import matplotlib.pyplot as plt
+import networkx as nx
 
 # -----------------------------
 # ⚙️ CONFIGURACIÓN DE LA APP
@@ -22,7 +24,7 @@ st.set_page_config(page_title="Fashion Virtual Assistant", layout="wide")
 # 🎨 MENÚ LATERAL DE NAVEGACIÓN
 # -----------------------------
 st.sidebar.title("🧭 Navegación")
-opcion = st.sidebar.radio("¿Qué deseas hacer?", (
+opcion = st.sidebar.radio("¿Qué quieres hacer?", (
     "💬 Chatear con el bot",
     "📸 Recomendación de prendas",
     "🔗 Grafos de similitud"
@@ -186,12 +188,41 @@ def send_message_to_rasa(message):
         return response.json()
     else:
         return [{"text": "❌ Error al conectar con el chatbot."}]
+    
+def mostrar_grafo_streamlit(G, df):
+    st.subheader("Visualizando el grafo de similitud")
+
+    plt.figure(figsize=(12, 8))
+    pos = nx.spring_layout(G, seed=42)
+    clases = df["clase"].unique()
+    color_map = {clase: plt.cm.tab20(i / len(clases)) for i, clase in enumerate(clases)}
+    
+    clase_dict = df["clase"].to_dict()
+    node_colors = [color_map[clase_dict[n]] for n in G.nodes]
+    node_sizes = [300 + 100 * G.degree(n) for n in G.nodes]
+    edge_weights = [G[u][v]['weight'] * 2 for u, v in G.edges]
+
+    nx.draw(
+        G, pos,
+        with_labels=False,
+        node_color=node_colors,
+        node_size=node_sizes,
+        edge_color="gray",
+        width=edge_weights,
+        alpha=0.85
+    )
+
+    for clase, color in color_map.items():
+        plt.plot([], [], marker='o', color=color, linestyle='', label=clase)
+    plt.legend(scatterpoints=1, frameon=False, labelspacing=1, loc='upper right')
+
+    st.pyplot(plt)
 
 # -----------------------------
 # 🗨️ INTERFAZ DE CHAT
 # -----------------------------
 if opcion == "💬 Chatear con el bot":
-    st.markdown("## 💬 Chat with Fashion Virtual Assistant")
+    st.markdown("## 💬 Chat con el Asistente Virtual de Moda")
     user_input = st.text_input("Escribe tu mensaje:", key="chat_input")
     
     if st.button("Enviar"):
@@ -204,7 +235,7 @@ if opcion == "💬 Chatear con el bot":
 # 📷 RECOMENDACIÓN CON IMAGEN
 # -----------------------------
 elif opcion == "📸 Recomendación de prendas":
-    st.markdown("## 📸 Fashion recommendations with images")
+    st.markdown("## 📸 Recomendaciones de moda con imágenes")
     uploaded_file = st.file_uploader("Sube una imagen", type=["jpg", "png"])
 
     if uploaded_file:
@@ -220,3 +251,21 @@ elif opcion == "📸 Recomendación de prendas":
         for i, (_, item) in enumerate(resultados.iterrows()):
             with cols[i]:
                 st.image(item["ruta"], caption=item["clase"], use_container_width=True)
+
+# -----------------------------
+# 🔗 GRAFOS DE SIMILITUD
+# -----------------------------
+elif opcion == "🔗 Grafos de similitud":
+    st.markdown("## 🔗 Grafo de Similitud")
+    st.write("### 🧵 Grafo de similitud de prendas")
+    
+    # Crear grafo de similitud
+    G = nx.Graph()
+    for i in range(len(X_features)):
+        for j in range(i + 1, len(X_features)):
+            similarity = cosine_similarity([X_features[i]], [X_features[j]])[0][0]
+            if similarity > 0.5:
+                G.add_edge(i, j, weight=similarity)
+    for i in range(len(X_features)):
+        G.nodes[i]['clase'] = df.iloc[i]['clase']
+    mostrar_grafo_streamlit(G, df)
