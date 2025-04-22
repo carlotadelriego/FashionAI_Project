@@ -1,0 +1,72 @@
+# 👗 FashionAI Project
+
+FashionAI es una aplicación de inteligencia artificial desarrollada para reconocer, clasificar y recomendar estilos de moda a partir de imágenes. Utiliza modelos entrenados con TensorFlow y técnicas de NLP con Rasa para ofrecer una experiencia conversacional completa.
+
+
+---
+
+## 🧠 Tecnologías utilizadas
+
+- **Python 3.9**
+- **TensorFlow / Keras** – Modelos `.h5` para clasificación de prendas y estilos
+- **Rasa** – Chatbot para interacción conversacional
+- **OpenCV** – Procesamiento de imágenes
+- **Git + Git LFS** – Control de versiones y archivos grandes
+- **VSCode + Jupyter** – Entorno de desarrollo
+
+
+---
+
+## 🗂️ Estructura del proyecto
+
+FashionAI_Project/ 
+    ├── modelos/             # Modelos entrenados (.h5) 
+    ├── models/              # Modelos (.gz)     
+    ├── data/                # Datos para entrenamiento, logos e imágenes varias
+    ├── rasa-uie/            # Entorno virtual (IGNORADO en git) 
+    ├── rasa/                # Proyecto Rasa (NLU, stories, domain, etc.)
+    ├── proyecto.py          # Lógica principal o demo 
+    ├── interfaz/            # Interfaz: forma y streamlit principal
+    ├── requirements.txt     # Dependencias
+    └── .gitignore           # Archivos ignorados en Git
+
+
+---
+
+## 🚀 ¿Cómo ejecutarlo?
+
+1. Clona el repositorio:
+git clone https://github.com/carlotadelriego/FashionAI_Project.git
+
+2. Activa el entorno virtual:
+source rasa-uie/bin/activate
+
+3. Instala las dependencias:
+pip install -r requirements.txt
+
+4. Ejecuta el chatbot o prueba los modelos:
+# Para lanzar Rasa
+rasa train
+rasa shell
+rasa run --enable-api (con rasa run ya llegaría)
+
+# Para probar un modelo de predicción
+python proyecto.py
+
+
+---
+
+## 🧪 Ejemplos de uso
+
+1. Predicción de prendas a partir de imágenes
+2. Recomendaciones de estilo según preferencias
+3. Chatbot para asesoría de moda personalizada
+
+
+---
+
+👩‍💻 Autora
+
+Carlota del Riego
+Estudiante apasionada por la inteligencia artificial aplicada a la moda.
+🔗 LinkedIn | 📧 carlota.fernandez.01@uie.edu
