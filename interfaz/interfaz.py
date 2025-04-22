@@ -1,6 +1,3 @@
-# -----------------------------
-# 📦 IMPORTACIONES NECESARIAS
-# -----------------------------
 import streamlit as st
 import os, tempfile, requests
 import pandas as pd
@@ -21,94 +18,89 @@ import networkx as nx
 st.set_page_config(page_title="Fashion Virtual Assistant", layout="wide")
 
 # -----------------------------
-# 🎨 MENÚ LATERAL DE NAVEGACIÓN
+# 🎨 MENÚ LATERAL DE NAVEGACIÓN MEJORADO
 # -----------------------------
+st.markdown("""
+    <style>
+    /* Estilos globales para la barra lateral */
+    .sidebar .sidebar-content {
+        background-color: #f7f7f7;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.1);
+        font-family: 'Poppins', sans-serif;
+    }
+
+    /* Título de la barra lateral */
+    .sidebar .sidebar-title {
+        color: #6b4e58;
+        font-size: 1.8rem;
+        font-weight: bold;
+        padding-bottom: 15px;
+    }
+
+    /* Estilo de las opciones del menú lateral */
+    .sidebar .stRadio>div>label {
+        font-size: 1.2rem;
+        color: #6b4e58;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    .sidebar .stRadio div {
+        background-color: rgba(255, 240, 250, 0.9);
+        border-radius: 12px;
+        padding: 12px;
+        margin-bottom: 15px;
+        transition: transform 0.2s ease, background-color 0.3s ease;
+    }
+    .sidebar .stRadio div:hover {
+        background-color: rgba(255, 220, 240, 1);
+        transform: translateY(-3px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Estilos para el icono de la radio */
+    .sidebar .stRadio input[type="radio"] {
+        margin-right: 12px;
+    }
+
+    /* Añadir un fondo agradable para el menú lateral */
+    .sidebar {
+        background-image: url('https://www.transparenttextures.com/patterns/asfalt.png');
+        background-size: 50%;
+    }
+
+    /* Botón de selección en la barra lateral */
+    .sidebar .stRadio div label:hover {
+        color: #ff6f61;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
 st.sidebar.title("🧭 Navegación")
+
+# Menú lateral de opciones con íconos
 opcion = st.sidebar.radio("¿Qué quieres hacer?", (
     "💬 Chatear con el bot",
     "📸 Recomendación de prendas",
     "🔗 Grafos de similitud"
 ))
 
+# Mostrar la opción seleccionada
+st.write(f"Opción seleccionada: {opcion}")
+
 # -----------------------------
-# 💅 ESTILOS HTML Y COMPONENTES
+# 🎨 CARGAR EL HTML
 # -----------------------------
-st.markdown("""
-<style>
-    body {
-        background: linear-gradient(to bottom, #ffffff, #fdfdfd);
-        font-family: 'Poppins', sans-serif;
-    }
-    .container-style {
-        background: rgba(254, 243, 253, 0.978); 
-        border-radius: 20px;
-        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        margin-bottom: 20px;
-    }
-    .chat-header {
-        background: rgba(255, 220, 235, 0.8);
-        color: #6b4e58;
-        text-align: center;
-        padding: 15px;
-        border-radius: 15px;
-        font-size: 2rem;
-        margin-bottom: 10px;
-    }
-    .chat-description, .instructions {
-        padding: 10px 20px;
-        background-color: rgba(255, 240, 250, 0.7);
-        border-radius: 10px;
-        text-align: center;
-    }
-    .features-wrapper {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-    }
-    .feature {
-        background-color: rgba(255, 245, 230, 0.8);
-        padding: 15px;
-        border-radius: 15px;
-        width: 30%;
-        min-width: 200px;
-        text-align: center;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-        transition: transform 0.3s ease;
-    }
-    .feature:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    }
-</style>
+import streamlit as st
+import streamlit.components.v1 as components
 
-<div class="container-style">
-    <div class="chat-header">Fashion Virtual Assistant</div>
-    <div class="chat-description">
-        Your personal assistant to explore the latest trends and find the perfect style for every occasion.
-    </div>
+# Lee el contenido del archivo HTML
+with open("/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/forma2.html", "r") as f:
+    html_content = f.read()
 
-    <div class="features-wrapper">
-        <div class="feature">
-            <h3><a href="https://www.elle.com/es/moda/tendencias/a63952675/tendencias-de-moda-2025-que-mas-rejuvenecen/">👗 Personalized Recommendations</a></h3>
-            <p>Receive fashion suggestions tailored to your personal style and preferences.</p>
-        </div>
-        <div class="feature">
-            <h3><a href="https://www.vogue.es/articulos/tendencias-primavera-verano-2025-que-se-lleva">🔥 Current Trends</a></h3>
-            <p>Stay up-to-date with the latest trends and styles in the fashion world.</p>
-        </div>
-        <div class="feature">
-            <h3><a href="https://www.instyle.es/moda/como-vestir-bien_60185">💡 Styling Tips</a></h3>
-            <p>Get professional advice on combining clothes and creating stunning looks.</p>
-        </div>
-    </div>
-
-    <div class="instructions">
-        Use the chat or image upload to explore your ideal style with the assistant.
-    </div>
-</div>
-""", unsafe_allow_html=True)
+# Renderiza el HTML usando components.html
+components.html(html_content, height=600, scrolling=True)
 
 # -----------------------------
 # 📁 CARGA DE DATOS Y MODELOS
@@ -181,43 +173,6 @@ def get_similar_items(uploaded_file):
     os.remove(temp_path)
     return df.iloc[indices], style_label
 
-def send_message_to_rasa(message):
-    url = "http://localhost:5005/webhooks/rest/webhook"
-    response = requests.post(url, json={"sender": "user", "message": message})
-    if response.status_code == 200:
-        return response.json()
-    else:
-        return [{"text": "❌ Error al conectar con el chatbot."}]
-    
-def mostrar_grafo_streamlit(G, df):
-    st.subheader("Visualizando el grafo de similitud")
-
-    plt.figure(figsize=(12, 8))
-    pos = nx.spring_layout(G, seed=42)
-    clases = df["clase"].unique()
-    color_map = {clase: plt.cm.tab20(i / len(clases)) for i, clase in enumerate(clases)}
-    
-    clase_dict = df["clase"].to_dict()
-    node_colors = [color_map[clase_dict[n]] for n in G.nodes]
-    node_sizes = [300 + 100 * G.degree(n) for n in G.nodes]
-    edge_weights = [G[u][v]['weight'] * 2 for u, v in G.edges]
-
-    nx.draw(
-        G, pos,
-        with_labels=False,
-        node_color=node_colors,
-        node_size=node_sizes,
-        edge_color="gray",
-        width=edge_weights,
-        alpha=0.85
-    )
-
-    for clase, color in color_map.items():
-        plt.plot([], [], marker='o', color=color, linestyle='', label=clase)
-    plt.legend(scatterpoints=1, frameon=False, labelspacing=1, loc='upper right')
-
-    st.pyplot(plt)
-
 # -----------------------------
 # 🗨️ INTERFAZ DE CHAT
 # -----------------------------
@@ -257,15 +212,50 @@ elif opcion == "📸 Recomendación de prendas":
 # -----------------------------
 elif opcion == "🔗 Grafos de similitud":
     st.markdown("## 🔗 Grafo de Similitud")
-    st.write("### 🧵 Grafo de similitud de prendas")
     
     # Crear grafo de similitud
     G = nx.Graph()
     for i in range(len(X_features)):
         for j in range(i + 1, len(X_features)):
             similarity = cosine_similarity([X_features[i]], [X_features[j]])[0][0]
-            if similarity > 0.5:
+            if similarity > 0.5:  # Filtra las aristas con una similitud alta
                 G.add_edge(i, j, weight=similarity)
+    
+    # Asigna etiquetas de clase a los nodos
     for i in range(len(X_features)):
         G.nodes[i]['clase'] = df.iloc[i]['clase']
+    
+    # Función para mostrar el grafo en Streamlit
+    def mostrar_grafo_streamlit(G, df):
+        st.subheader("Visualizando el grafo de similitud")
+
+        plt.figure(figsize=(12, 8))
+        pos = nx.spring_layout(G, seed=42)
+        clases = df["clase"].unique()
+        color_map = {clase: plt.cm.tab20(i / len(clases)) for i, clase in enumerate(clases)}
+
+        clase_dict = df["clase"].to_dict()
+        node_colors = [color_map[clase_dict[n]] for n in G.nodes]
+        node_sizes = [300 + 100 * G.degree(n) for n in G.nodes]
+        edge_weights = [G[u][v]['weight'] * 2 for u, v in G.edges]
+
+        nx.draw(
+            G, pos,
+            with_labels=False,
+            node_color=node_colors,
+            node_size=node_sizes,
+            edge_color="gray",
+            width=edge_weights,
+            alpha=0.85
+        )
+
+        # Añadir leyenda para las clases
+        for clase, color in color_map.items():
+            plt.plot([], [], marker='o', color=color, linestyle='', label=clase)
+        plt.legend(scatterpoints=1, frameon=False, labelspacing=1, loc='upper right')
+
+        st.pyplot(plt)
+
+    # Mostrar el grafo de similitud
     mostrar_grafo_streamlit(G, df)
+
