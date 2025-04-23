@@ -87,3 +87,100 @@ def guardar_grafo(grafo, ruta):
 def cargar_grafo(ruta):
     with open(ruta, 'rb') as f:
         return pickle.load(f)
+
+import base64
+import plotly.graph_objects as go
+import networkx as nx
+
+def mostrar_nube_plotly(df, G, start_node=0, depth=2):
+    """
+    Visualiza el grafo de similitud usando Plotly con información al pasar el cursor
+    """
+    # ---------- Subgrafo (BFS) ----------
+    if start_node is not None:
+        nodes_to_include = {start_node}
+        frontier = [start_node]
+        for _ in range(depth):
+            next_frontier = []
+            for node in frontier:
+                neighbors = list(G.neighbors(node))
+                next_frontier.extend(neighbors)
+                nodes_to_include.update(neighbors)
+            frontier = next_frontier
+        subgraph = G.subgraph(nodes_to_include)
+    else:
+        subgraph = G
+
+    # ---------- Layout ----------
+    pos = nx.spring_layout(subgraph, seed=42)
+
+    # ---------- Aristas ----------
+    edge_x, edge_y = [], []
+    for u, v in subgraph.edges():
+        x0, y0 = pos[u]; x1, y1 = pos[v]
+        edge_x += [x0, x1, None]
+        edge_y += [y0, y1, None]
+
+    edge_trace = go.Scatter(x=edge_x, y=edge_y,
+                            mode="lines",
+                            line=dict(width=0.5, color="#888"),
+                            hoverinfo="none")
+
+    # ---------- Nodos ----------
+    node_x, node_y = [], []
+    node_color, node_text = [], []
+    node_classes, node_imgs = [], []
+
+    # mapa clase→color (Viridis)
+    color_map = {c: i for i, c in enumerate(df["clase"].unique())}
+
+    for node in subgraph.nodes():
+        x, y = pos[node]
+        node_x.append(x); node_y.append(y)
+        clase = df.iloc[node]["clase"]
+        node_classes.append(clase)
+        node_color.append(color_map[clase])
+        node_text.append(clase)
+        node_imgs.append(df.iloc[node]["ruta"])
+
+    # encode imágenes
+    encoded_imgs = []
+    for p in node_imgs:
+        try:
+            with open(p, "rb") as f:
+                encoded = base64.b64encode(f.read()).decode()
+        except Exception:
+            encoded = ""
+        encoded_imgs.append(encoded)
+
+    node_trace = go.Scatter(
+        x=node_x, y=node_y, mode="markers",
+        marker=dict(size=10,
+                    colorscale="Viridis",
+                    color=node_color,
+                    showscale=True,
+                    colorbar=dict(title="Categoría", thickness=15,
+                                  xanchor="left", titleside="right"),
+                    line_width=2),
+        text=node_text,
+        hoverinfo="text",
+        hovertemplate=(
+            '<img src="data:image/png;base64,%{customdata[2]}" height="100px"><br>'
+            '<b>Clase:</b> %{customdata[0]}<br>'
+            '<b>ID:</b> %{customdata[1]}<extra></extra>'),
+        customdata=list(zip(node_classes,
+                            list(range(len(node_classes))),
+                            encoded_imgs))
+    )
+
+    fig = go.Figure(data=[edge_trace, node_trace],
+                    layout=go.Layout(
+                        title="Grafo de Similitud entre Prendas",
+                        titlefont_size=16,
+                        showlegend=False,
+                        hovermode="closest",
+                        margin=dict(b=20, l=5, r=5, t=40),
+                        xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+                        yaxis=dict(showgrid=False, zeroline=False, showticklabels=False)
+                    ))
+    return fig

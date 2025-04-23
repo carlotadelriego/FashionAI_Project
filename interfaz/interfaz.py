@@ -17,6 +17,7 @@ import tensorflow as tf
 import matplotlib.pyplot as plt
 import networkx as nx
 import sys
+from pathlib import Path
 sys.path.append('/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/bfs_recommendation.py')
 from bfs_recommendation import construir_grafo_similitud, bfs_recommendations, mostrar_nube_plotly
 
@@ -146,64 +147,53 @@ def send_message_to_rasa(message):
         st.error(f"Error de conexión con el chatbot: {e}")
         return [{"text": "❌ Error al conectar con el chatbot."}]
 
-# def mostrar_grafo_streamlit(G, df):
-    st.subheader("Visualizando el grafo de similitud")
-
-    plt.figure(figsize=(12, 8))
-    pos = nx.spring_layout(G, seed=42)
-    clases = df["clase"].unique()
-    color_map = {clase: plt.cm.tab20(i / len(clases)) for i, clase in enumerate(clases)}
-
-    clase_dict = df["clase"].to_dict()
-    node_colors = [color_map[clase_dict[n]] for n in G.nodes]
-    node_sizes = [300 + 100 * G.degree(n) for n in G.nodes]
-    edge_weights = [G[u][v]['weight'] * 2 for u, v in G.edges]
-
-    nx.draw(
-        G, pos,
-        with_labels=False,
-        node_color=node_colors,
-        node_size=node_sizes,
-        edge_color="gray",
-        width=edge_weights,
-        alpha=0.85
-    )
-
-    for clase, color in color_map.items():
-        plt.plot([], [], marker='o', color=color, linestyle='', label=clase)
-    plt.legend(scatterpoints=1, frameon=False, labelspacing=1, loc='upper right')
-
-    st.pyplot(plt)
 
 # -----------------------------
 # 🧩 INTERFAZ PRINCIPAL
 # -----------------------------
-opcion = st.session_state.opcion
+# 
+if "opcion" not in st.session_state:
+    st.session_state.opcion = "🏠 Inicio"
 
-if opcion == "🏠 Inicio":
+if st.session_state.opcion == "🏠 Inicio":
     st.title("🛍️ Fashion Virtual Assistant")
-    st.markdown("""
-    Bienvenido/a al **Asistente Virtual de Moda**. Este proyecto combina inteligencia artificial con visión por computador y procesamiento del lenguaje natural para ofrecerte una experiencia interactiva en el mundo de la moda.  
-    Aquí podrás:
 
-    - 👗 **Chatear** con un asistente virtual entrenado para hablar sobre estilos, prendas, y recomendaciones personalizadas.
-    - 📸 **Subir imágenes** de ropa para recibir sugerencias de prendas similares.
-    - 🔍 **Visualizar un grafo de similitud** que relaciona prendas según sus características visuales.
+    # 3️⃣ Contenido envuelto en la “card”
+    st.markdown(
+        """
+        <div class="card">
+        <p>Bienvenido/a al <strong>Asistente Virtual de Moda</strong>. Este proyecto combina
+        inteligencia artificial con visión por computador y procesamiento del lenguaje natural
+        para ofrecerte una experiencia interactiva en el mundo de la moda.</p>
 
-    ---
-    **¿Qué tecnologías usamos?**
+        <p>Aquí podrás:</p>
 
-    - `Streamlit`: para crear esta interfaz web interactiva.
-    - `TensorFlow`: para los modelos de clasificación y estilo.
-    - `Rasa`: para el chatbot conversacional.
-    - `OpenCV` y `scikit-learn`: para procesamiento de imágenes y similitud.
-    - `NetworkX`: para construir y visualizar relaciones entre prendas.
+        <ul>
+          <li>👗 <strong>Chatear</strong> con un asistente virtual entrenado para hablar sobre estilos, prendas
+              y recomendaciones personalizadas.</li>
+          <li>📸 <strong>Subir imágenes</strong> de ropa para recibir sugerencias de prendas similares.</li>
+          <li>🔍 <strong>Visualizar un grafo de similitud</strong> que relaciona prendas según sus características visuales.</li>
+        </ul>
 
-    ¡Explora las secciones del menú lateral y descubre cómo la inteligencia artificial puede transformar tu experiencia de moda!
-    """)
+        <hr>
 
+        <p><strong>¿Qué tecnologías usamos?</strong></p>
 
-elif opcion == "💬 Chatear con el bot":
+        <ul>
+          <li><code>Streamlit</code>: para crear esta interfaz web interactiva.</li>
+          <li><code>TensorFlow</code>: para los modelos de clasificación y estilo.</li>
+          <li><code>Rasa</code>: para el chatbot conversacional.</li>
+          <li><code>OpenCV</code> y <code>scikit‑learn</code>: para procesamiento de imágenes y similitud.</li>
+          <li><code>NetworkX</code>: para construir y visualizar relaciones entre prendas.</li>
+        </ul>
+
+        <p>¡Explora las secciones del menú lateral y descubre cómo la inteligencia artificial puede transformar tu experiencia de moda!</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+elif st.session_state.opcion == "💬 Chatear con el bot":
     st.markdown("## 💬 Chat con el Asistente Virtual de Moda")
     user_input = st.text_input("Escribe tu mensaje:", key="chat_input")
     if st.button("Enviar"):
@@ -212,7 +202,7 @@ elif opcion == "💬 Chatear con el bot":
             for r in respuestas:
                 st.markdown(f"**🤖:** {r['text']}")
 
-elif opcion == "📸 Recomendación de prendas":
+elif st.session_state.opcion == "📸 Recomendación de prendas":
     st.markdown("## 📸 Recomendaciones de moda con imágenes")
     uploaded_file = st.file_uploader("Sube una imagen", type=["jpg", "png"])
     if uploaded_file and uploaded_file.type in ["image/jpeg", "image/png"]:
@@ -230,7 +220,7 @@ elif opcion == "📸 Recomendación de prendas":
         st.warning("Por favor, sube una imagen JPG o PNG válida.")
 
 
-elif opcion == "🔗 Ver grafo de similitud":
+elif st.session_state.opcion == "🔗 rafo de similitud":
     st.markdown("## 🔗 Grafo de Similitud entre Prendas")
     
     top_k = st.slider("🔢 Número de conexiones por nodo (top_k)", 2, 10, 5)
@@ -244,19 +234,33 @@ elif opcion == "🔗 Ver grafo de similitud":
     # Ejemplo de DataFrame con información de las prendas
     data = {
         "clase": ["Accesories", "Boots", "Dresses", "Heels", "Hoodies", "Jackets", "Pants", "Shirts", "Sneakers", "Sweaters", "T-Shirts"],
-        "ruta": ["ruta_imagen_camisa.jpg", "ruta_imagen_pantalon.jpg", "ruta_imagen_zapatos.jpg", "ruta_imagen_chaqueta.jpg"]
+        "ruta": ["/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/info/gorra.png", 
+                "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/info/bota.png",
+                "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/info/vestido.png",
+                "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/info/tacon.png",
+                "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/info/sudadera.png",
+                "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/info/chaqueta.jpg",
+                "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/info/pant.png",
+                "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/info/caisa.png",
+                "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/info/teni.png",
+                "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/info/jersey.png",
+                "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/info/cami.png"
+                
+                ]
     }
     df = pd.DataFrame(data)
 
     # Generar las características de las prendas (deberían ser características reales)
-    features = np.array([[0.2, 0.3, 0.5], [0.4, 0.6, 0.7], [0.5, 0.2, 0.4], [0.6, 0.8, 0.9]])
+    features = np.array([[0.2, 0.3, 0.5], [0.4, 0.6, 0.7], [0.5, 0.2, 0.4], [0.6, 0.8, 0.9], [0.1, 0.2, 0.3], [0.7, 0.6, 0.9], [0.8, 0.8, 0.5], [0.3, 0.4, 0.6], [0.5, 0.7, 0.6], [0.2, 0.1, 0.4], [0.4, 0.5, 0.8]])
 
+    # Validar top_k antes de construir el grafo
+    top_k = min(top_k, len(features))  # Asegurarse de que top_k no sea mayor que el número de características
 
     # Construir el grafo de similitud
     G = construir_grafo_similitud(df, features)
 
     # Mostrar el gráfico
-    fig = mostrar_nube_plotly(df, G, start_node=0)  # Comienza con el primer nodo
+    fig = mostrar_nube_plotly(df, G, start_node=nodo_inicio)  # Comienza con el nodo inicial proporcionado
     selected = st.plotly_chart(fig, use_container_width=True)
 
     # Comprobar si se hizo clic en un nodo
@@ -274,4 +278,3 @@ elif opcion == "🔗 Ver grafo de similitud":
             st.write(f"Clase de la prenda: {clase}")  # Información adicional sobre la prenda
         except Exception as e:
             st.warning("No se pudo obtener información del nodo seleccionado.")
-
