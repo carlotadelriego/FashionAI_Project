@@ -19,7 +19,7 @@ import networkx as nx
 import sys
 from pathlib import Path
 sys.path.append('/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/bfs_recommendation.py')
-from bfs_recommendation import construir_grafo_similitud, bfs_recomendaciones, mostrar_nube_plotly, mostrar_grafo_streamlit
+from bfs_recommendation import construir_grafo_similitud, bfs_recomendaciones, mostrar_nube_plotly
 
 
 # -----------------------------
@@ -108,6 +108,30 @@ def cargar_modelos_y_datos():
     return df, fashion_model, style_model, X_features
 
 df, fashion_model, style_model, X_features = cargar_modelos_y_datos()
+
+
+# Ejemplo de DataFrame con información de las prendas
+data = {
+    "clase": ["Accesorios", "Botas", "Vestido", "Tacón", "Sudadera", "Chaqueta", "Pantalones", "Camisetas", "Zapatillas", "Jersey", "Camiseta"],
+    "ruta": ["/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/static/img/bota.png", 
+             "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/static/img/bota.png",
+             "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/static/img/vestido.png",
+             "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/static/img/tacon.png",
+             "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/static/img/sudadera.png",
+             "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/static/img/chaqueta.jpg",
+             "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/static/img/pant.png",
+             "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/static/img/caisa.png",
+             "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/static/img/teni.png",
+             "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/static/img/jersey.png",
+             "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/static/img/cami.png"]
+}
+df = pd.DataFrame(data)
+
+# Generar las características de las prendas (deberían ser características reales)
+features = np.array([[0.2, 0.3, 0.5], [0.4, 0.6, 0.7], [0.5, 0.2, 0.4], [0.6, 0.8, 0.9], [0.1, 0.2, 0.3], 
+                     [0.7, 0.6, 0.9], [0.8, 0.8, 0.5], [0.3, 0.4, 0.6], [0.5, 0.7, 0.6], [0.2, 0.1, 0.4], 
+                     [0.4, 0.5, 0.8]])
+
 
 
 # -----------------------------
@@ -277,13 +301,35 @@ if st.session_state.opcion == "🏠 Inicio":
 
 
 elif st.session_state.opcion == "💬 Chatear con el bot":
+    st.markdown(
+        """
+        <style>
+        .pink-box
+        {
+        background:#ffe6f2;
+        padding:1.4rem 1.6rem;
+        border-radius:12px;
+        box-shadow:0 3px 8px rgba(0,0,0,0.08);
+        margin-top:1rem;
+        }
+        .pink-box p{margin:.35rem 0;font-weight:500;}
+        </style>
+        """, unsafe_allow_html=True
+    )
+
     st.markdown("## 💬 Chat con el Asistente Virtual de Moda")
+
+    # Abrimos la caja antes de TODOS los elementos
+    st.markdown('<div class="pink-box">', unsafe_allow_html=True)
+
     user_input = st.text_input("Escribe tu mensaje:", key="chat_input")
-    if st.button("Enviar"):
-        if user_input:
-            respuestas = send_message_to_rasa(user_input)
-            for r in respuestas:
-                st.markdown(f"**🤖:** {r['text']}")
+    if st.button("Enviar") and user_input:
+        respuestas = send_message_to_rasa(user_input)
+        for r in respuestas:
+            st.markdown(f"<p>**🤖:** {r['text']}</p>", unsafe_allow_html=True)
+
+    # Cerramos la caja
+    st.markdown('</div>', unsafe_allow_html=True)
 
 
 
@@ -306,63 +352,36 @@ elif st.session_state.opcion == "📸 Recomendación de prendas":
 
 
 
-
-
-elif st.session_state.opcion == "🔗 Grafo de similitud":
+elif st.session_state.opcion == "🔗 Ver grafo de similitud":
     st.markdown("## 🔗 Grafo de Similitud entre Prendas")
     
-    top_k = st.slider("🔢 Número de conexiones por nodo (top_k)", 2, 10, 5)
-    nodo_inicio = st.number_input("🔍 Nodo inicial para subgrafo (opcional)", min_value=0, max_value=len(df)-1, step=1, value=0)
-    profundidad = st.slider("📏 Profundidad del subgrafo", 1, 3, 2)
-    
-    st.write("🛠️ Construyendo el grafo de similitud...")
-    min_sim = st.slider("🔗 Similitud mínima para conectar", 0.0, 1.0, 0.4)
+    try:
+        st.write("✅ Datos cargados:", df.shape)
+        st.write("✅ Features shape:", features.shape)
+        
+        top_k = st.slider("🔢 Número de conexiones por nodo (top_k)", 2, 10, 5)
+        nodo_inicio = st.number_input("🔍 Nodo inicial para subgrafo (opcional)", min_value=0, max_value=len(df)-1, step=1, value=0)
+        profundidad = st.slider("📏 Profundidad del subgrafo", 1, 3, 2)
 
+        top_k = min(top_k, len(features))
+        
+        st.write("🛠️ Construyendo grafo...")
+        G = construir_grafo_similitud(df, features, top_k=top_k)
+        st.write("✅ Grafo construido con", len(G.nodes), "nodos y", len(G.edges), "aristas")
 
-    # Ejemplo de DataFrame con información de las prendas
-    data = {
-        "clase": ["Accesories", "Boots", "Dresses", "Heels", "Hoodies", "Jackets", "Pants", "Shirts", "Sneakers", "Sweaters", "T-Shirts"],
-        "ruta": ["/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/info/gorra.png", 
-                "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/info/bota.png",
-                "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/info/vestido.png",
-                "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/info/tacon.png",
-                "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/info/sudadera.png",
-                "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/info/chaqueta.jpg",
-                "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/info/pant.png",
-                "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/info/caisa.png",
-                "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/info/teni.png",
-                "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/info/jersey.png",
-                "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/info/cami.png"
-                
-                ]
-    }
-    df = pd.DataFrame(data)
+        st.write("📊 Mostrando grafo Plotly...")
+        fig = mostrar_nube_plotly(df, G, start_node=nodo_inicio, depth=profundidad)
+        st.plotly_chart(fig, use_container_width=True)
 
-    # Generar las características de las prendas (deberían ser características reales)
-    features = np.array([[0.2, 0.3, 0.5], [0.4, 0.6, 0.7], [0.5, 0.2, 0.4], [0.6, 0.8, 0.9], [0.1, 0.2, 0.3], [0.7, 0.6, 0.9], [0.8, 0.8, 0.5], [0.3, 0.4, 0.6], [0.5, 0.7, 0.6], [0.2, 0.1, 0.4], [0.4, 0.5, 0.8]])
+        st.markdown("### 👕 Detalles de una prenda del grafo")
+        nodo_id = st.selectbox("Selecciona un nodo del subgrafo:", options=list(G.nodes), index=0)
 
-    # Validar top_k antes de construir el grafo
-    top_k = min(top_k, len(features))  # Asegurarse de que top_k no sea mayor que el número de características
+        if nodo_id is not None:
+            clase = df.iloc[nodo_id]["clase"]
+            ruta = df.iloc[nodo_id]["ruta"]
+            st.image(ruta, caption=f"Clase: {clase}", use_container_width=True)
+            st.write(f"🧵 Clase: **{clase}**")
 
-    # Construir el grafo de similitud
-    G = construir_grafo_similitud(df, features)
+    except Exception as e:
+        st.error(f"❌ Error al generar el grafo: {e}")
 
-    # Mostrar el gráfico
-    fig = mostrar_nube_plotly(df, G, start_node=nodo_inicio)  # Comienza con el nodo inicial proporcionado
-    selected = st.plotly_chart(fig, use_container_width=True)
-
-    # Comprobar si se hizo clic en un nodo
-    if selected and selected.selected_data:
-        try:
-            # Extraemos el primer punto seleccionado
-            punto = selected.selected_data["points"][0]
-            
-            # Recuperamos la clase y la ruta de la imagen del nodo
-            clase, ruta = punto["customdata"]
-            
-            # Mostrar detalles del nodo seleccionado
-            st.markdown("### 👕 Detalles del nodo seleccionado")
-            st.image(ruta, caption=f"Clase: {clase}", use_container_width=True)  # Muestra la imagen
-            st.write(f"Clase de la prenda: {clase}")  # Información adicional sobre la prenda
-        except Exception as e:
-            st.warning("No se pudo obtener información del nodo seleccionado.")
