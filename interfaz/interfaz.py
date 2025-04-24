@@ -50,6 +50,8 @@ st.markdown("""
 if 'opcion' not in st.session_state:
     st.session_state.opcion = "🏠 Inicio"
 
+st.sidebar.title("🛍️ Fashion Virtual Assistant")
+
 if st.sidebar.button("🏠 Inicio"):
     st.session_state.opcion = "🏠 Inicio"
 
@@ -151,47 +153,88 @@ def send_message_to_rasa(message):
 # -----------------------------
 # 🧩 INTERFAZ PRINCIPAL
 # -----------------------------
-# 
 if "opcion" not in st.session_state:
     st.session_state.opcion = "🏠 Inicio"
 
 if st.session_state.opcion == "🏠 Inicio":
-    st.title("🛍️ Fashion Virtual Assistant")
+    # Mostrar la imagen de fondo ocupando toda la pantalla
+    st.image('interfaz/revistas.png', use_container_width=True, output_format="PNG")
 
-    # 3️⃣ Contenido envuelto en la “card”
+    # Mostrar el contenido dentro de una caja blanca con opacidad y centrado, encima de la imagen
     st.markdown(
         """
+        <style>
+            /* Estilo para la imagen de fondo */
+            .stImage > img {
+                position: fixed;  /* La imagen se fija al fondo de la pantalla */
+                top: 0;  /* La imagen comienza desde la parte superior */
+                left: 0;  /* La imagen comienza desde la parte izquierda */
+                width: 100vw;  /* La imagen ocupa el 100 del ancho de la ventana */
+                height: 100vh;  /* La imagen ocupa el 100 de la altura de la ventana */
+                object-fit: cover;  /* Ajusta la imagen para que cubra toda el área sin deformarse */
+                z-index: -1;  /* La imagen debe estar detrás del contenido */
+            }
+
+
+
+            /* Estilo para la caja blanca con opacidad */
+            .card {
+                background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco con opacidad */
+                padding: 30px; /* Espaciado interno */
+                border-radius: 10px; /* Bordes redondeados */
+                max-width: 1100px; /* Ancho máximo de la caja */
+                margin: 100px auto;  /* Centrado vertical y horizontal */
+                color: black; /* Color del texto */
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidad */
+                position: relative;  /* Posición */
+                z-index: 1;  /* La caja de texto debe estar encima de la imagen sin taparla */
+            }
+
+            /* Estilo para el texto */
+            .card p, .card ul {
+                font-size: 16px;
+            }
+        </style>
+
+        <div class="stImage">
+            <img src="interfaz/fondo.png">
+        </div>
+
         <div class="card">
-        <p>Bienvenido/a al <strong>Asistente Virtual de Moda</strong>. Este proyecto combina
-        inteligencia artificial con visión por computador y procesamiento del lenguaje natural
-        para ofrecerte una experiencia interactiva en el mundo de la moda.</p>
+            <h2>🛍️ Fashion Virtual Assistant</h2>
+            <p>Bienvenido/a al <strong>Asistente Virtual de Moda</strong>. Este proyecto combina
+            inteligencia artificial con visión por computador y procesamiento del lenguaje natural
+            para ofrecerte una experiencia interactiva en el mundo de la moda.</p>
 
-        <p>Aquí podrás:</p>
+            <p>Aquí podrás:</p>
 
-        <ul>
-          <li>👗 <strong>Chatear</strong> con un asistente virtual entrenado para hablar sobre estilos, prendas
-              y recomendaciones personalizadas.</li>
-          <li>📸 <strong>Subir imágenes</strong> de ropa para recibir sugerencias de prendas similares.</li>
-          <li>🔍 <strong>Visualizar un grafo de similitud</strong> que relaciona prendas según sus características visuales.</li>
-        </ul>
+            <ul>
+            <li>👗 <strong>Chatear</strong> con un asistente virtual entrenado para hablar sobre estilos, prendas
+                y recomendaciones personalizadas.</li>
+            <li>📸 <strong>Subir imágenes</strong> de ropa para recibir sugerencias de prendas similares.</li>
+            <li>🔍 <strong>Visualizar un grafo de similitud</strong> que relaciona prendas según sus características visuales.</li>
+            </ul>
 
-        <hr>
+            <hr>
 
-        <p><strong>¿Qué tecnologías usamos?</strong></p>
+            <p><strong>¿Qué tecnologías usamos?</strong></p>
 
-        <ul>
-          <li><code>Streamlit</code>: para crear esta interfaz web interactiva.</li>
-          <li><code>TensorFlow</code>: para los modelos de clasificación y estilo.</li>
-          <li><code>Rasa</code>: para el chatbot conversacional.</li>
-          <li><code>OpenCV</code> y <code>scikit‑learn</code>: para procesamiento de imágenes y similitud.</li>
-          <li><code>NetworkX</code>: para construir y visualizar relaciones entre prendas.</li>
-        </ul>
+            <ul>
+            <li><code>Streamlit</code>: para crear esta interfaz web interactiva.</li>
+            <li><code>TensorFlow</code>: para los modelos de clasificación y estilo.</li>
+            <li><code>Rasa</code>: para el chatbot conversacional.</li>
+            <li><code>OpenCV</code> y <code>scikit‑learn</code>: para procesamiento de imágenes y similitud.</li>
+            <li><code>NetworkX</code>: para construir y visualizar relaciones entre prendas.</li>
+            </ul>
 
-        <p>¡Explora las secciones del menú lateral y descubre cómo la inteligencia artificial puede transformar tu experiencia de moda!</p>
+            <p>¡Explora las secciones del menú lateral y descubre cómo la inteligencia artificial puede transformar tu experiencia de moda!</p>
         </div>
         """,
         unsafe_allow_html=True,
     )
+
+
+
 
 elif st.session_state.opcion == "💬 Chatear con el bot":
     st.markdown("## 💬 Chat con el Asistente Virtual de Moda")
@@ -220,7 +263,7 @@ elif st.session_state.opcion == "📸 Recomendación de prendas":
         st.warning("Por favor, sube una imagen JPG o PNG válida.")
 
 
-elif st.session_state.opcion == "🔗  grafo de similitud":
+elif st.session_state.opcion == "🔗 Grafo de similitud":
     st.markdown("## 🔗 Grafo de Similitud entre Prendas")
     
     top_k = st.slider("🔢 Número de conexiones por nodo (top_k)", 2, 10, 5)
