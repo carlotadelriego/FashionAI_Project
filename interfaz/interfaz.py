@@ -27,6 +27,7 @@ from bfs_recommendation import construir_grafo_similitud, bfs_recomendaciones, m
 # -----------------------------
 st.set_page_config(page_title="Fashion Virtual Assistant", layout="wide")
 
+
 # -----------------------------
 # 🎨 ESTILO PERSONALIZADO
 # -----------------------------
@@ -43,6 +44,7 @@ st.markdown("""
     }
     </style>
 """, unsafe_allow_html=True)
+
 
 # -----------------------------
 # 🎛️ MENÚ LATERAL
@@ -106,6 +108,7 @@ def cargar_modelos_y_datos():
     return df, fashion_model, style_model, X_features
 
 df, fashion_model, style_model, X_features = cargar_modelos_y_datos()
+
 
 # -----------------------------
 # 🧠 FUNCIONES
@@ -171,11 +174,6 @@ if "opcion" not in st.session_state:
 if st.session_state.opcion == "🏠 Inicio":
     # Mostrar la imagen de fondo ocupando toda la pantalla
     st.image('/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/revistas.png', use_container_width=True, output_format="PNG")
-
-    # Mostrar el contenido dentro de una caja blanca con opacidad y centrado, encima de la imagen
-
-    # Configuración inicial (DEBE SER LA PRIMERA LÍNEA)
-    st.set_page_config(layout="wide")
 
     # Cargar imagen (mejor práctica)
     try:
@@ -244,7 +242,6 @@ if st.session_state.opcion == "🏠 Inicio":
     </style>
     """, unsafe_allow_html=True)
 
-    # HTML para la estructura
     st.markdown(f"""
     <div class="fullscreen-img-container">
         <img class="fullscreen-img" src="data:image/png;base64,{bg_image_to_base64(bg_image)}" alt="Fashion Background">
@@ -288,6 +285,8 @@ elif st.session_state.opcion == "💬 Chatear con el bot":
             for r in respuestas:
                 st.markdown(f"**🤖:** {r['text']}")
 
+
+
 elif st.session_state.opcion == "📸 Recomendación de prendas":
     st.markdown("## 📸 Recomendaciones de moda con imágenes")
     uploaded_file = st.file_uploader("Sube una imagen", type=["jpg", "png"])
@@ -304,6 +303,9 @@ elif st.session_state.opcion == "📸 Recomendación de prendas":
                 st.image(item["ruta"], caption=item["clase"], use_container_width=True)
     else:
         st.warning("Por favor, sube una imagen JPG o PNG válida.")
+
+
+
 
 
 elif st.session_state.opcion == "🔗 Grafo de similitud":
