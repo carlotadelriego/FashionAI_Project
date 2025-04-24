@@ -52,3 +52,9 @@ rules:
   steps:
     - intent: solicitar_recomendacion
     - action: action_recomendar_prendas
+
+- rule: Recomendar look completo
+  steps:
+    - intent: solicitar_look_completo
+    - action: action_recomendar_look_completo
+

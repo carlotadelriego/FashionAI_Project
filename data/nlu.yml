@@ -99,3 +99,12 @@ nlu:
     - recomiéndame ropa [urbana](style)
     - quiero algo cómodo y [casual](style)
     - busco una [chaqueta](clothing_item)
+
+
+- intent: solicitar_look_completo
+  examples: |
+    - Armame un look [casual](style)
+    - Quiero un outfit completo [elegante](style)
+    - Qué me pongo para una [cita](event)
+    - Necesito un conjunto [sport](style)
+

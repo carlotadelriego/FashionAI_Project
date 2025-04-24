@@ -122,3 +122,55 @@ class ActionRecomendarPrendas(Action):
             dispatcher.utter_message(text="No encontré ninguna prenda con ese estilo o tipo. ¿Querés probar otra búsqueda?")
 
         return []
+
+
+
+class ActionRecomendarLookCompleto(Action):
+    def name(self) -> Text:
+        return "action_recomendar_look_completo"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        import pandas as pd
+
+        try:
+            from interfaz.interfaz import df as global_df
+            df = global_df.copy()
+        except:
+            df = pd.DataFrame({
+                "clase": ["camiseta", "pantalon", "zapatillas", "chaqueta", "vestido"],
+                "ruta": ["camiseta.png", "pantalon.png", "zapatilla.png", "chaqueta.png", "vestido.png"],
+                "estilo": ["casual", "casual", "casual", "urbano", "elegante"]
+            })
+
+        estilo = tracker.get_slot("style") or "casual"
+        estilo = estilo.lower()
+
+        # Agrupar por tipo (simplificado por nombre de clase)
+        tops = ["camiseta", "camisa", "chaqueta"]
+        bottoms = ["pantalon", "falda", "short"]
+        shoes = ["zapatillas", "tacon", "botas"]
+
+        top = df[df["clase"].str.lower().isin(tops) & df["estilo"].str.lower().str.contains(estilo)]
+        bottom = df[df["clase"].str.lower().isin(bottoms) & df["estilo"].str.lower().str.contains(estilo)]
+        shoe = df[df["clase"].str.lower().isin(shoes) & df["estilo"].str.lower().str.contains(estilo)]
+
+        prendas = []
+
+        if not top.empty:
+            prendas.append(top.sample(1).iloc[0])
+        if not bottom.empty:
+            prendas.append(bottom.sample(1).iloc[0])
+        if not shoe.empty:
+            prendas.append(shoe.sample(1).iloc[0])
+
+        if prendas:
+            dispatcher.utter_message(text=f"✨ Aquí tienes un look completo con estilo **{estilo}**:")
+            for prenda in prendas:
+                dispatcher.utter_message(json_message={"recomendacion_idx": int(prenda.name)})
+        else:
+            dispatcher.utter_message(text="😕 No pude encontrar un look completo para ese estilo. ¿Querés probar con otro?")
+
+        return []

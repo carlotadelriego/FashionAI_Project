@@ -18,6 +18,10 @@ intents:
   - ask_clothing_price
   - nlu_fallback  # Intent for handling unrecognized messages
   - solicitar_recomendacion
+  - solicitar_look_completo
+  - ask_clothing_size
+
+
 
 
 entities:
@@ -68,7 +72,6 @@ actions:
   - action_outfit_recommendation
   - action_listen
   - action_restart
-  - action_session_start
   - action_deactivate_loop
   - action_revert_fallback_events
   - action_default_ask_affirmation
@@ -76,7 +79,6 @@ actions:
   - action_two_stage_fallback
   - action_unlikely_intent
   - action_back
-  - action_extract_slots
   - utter_ask_for_image
   - utter_ask_for_preferences
   - utter_cheer_up
@@ -95,6 +97,8 @@ actions:
   - utter_outfit_match
   - utter_style_suggestion
   - utter_clothing_size
+  - x_recomendar_prendas
+  - action_recomendar_look_completo
   - action_recomendar_prendas
 
 
