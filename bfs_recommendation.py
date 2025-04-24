@@ -183,4 +183,5 @@ def mostrar_nube_plotly(df, G, start_node=0, depth=2):
                         xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
                         yaxis=dict(showgrid=False, zeroline=False, showticklabels=False)
                     ))
-    return fig
+    # Usamos st.plotly_chart para mostrar el gráfico
+    st.plotly_chart(fig)

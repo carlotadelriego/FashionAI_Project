@@ -19,7 +19,7 @@ import networkx as nx
 import sys
 from pathlib import Path
 sys.path.append('/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/bfs_recommendation.py')
-from bfs_recommendation import construir_grafo_similitud, bfs_recommendations, mostrar_nube_plotly
+from bfs_recommendation import construir_grafo_similitud, bfs_recomendaciones, mostrar_nube_plotly, mostrar_grafo_streamlit
 
 
 # -----------------------------
@@ -220,7 +220,7 @@ elif st.session_state.opcion == "📸 Recomendación de prendas":
         st.warning("Por favor, sube una imagen JPG o PNG válida.")
 
 
-elif st.session_state.opcion == "🔗 rafo de similitud":
+elif st.session_state.opcion == "🔗  grafo de similitud":
     st.markdown("## 🔗 Grafo de Similitud entre Prendas")
     
     top_k = st.slider("🔢 Número de conexiones por nodo (top_k)", 2, 10, 5)
