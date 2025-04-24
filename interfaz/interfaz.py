@@ -148,6 +148,18 @@ def send_message_to_rasa(message):
     except requests.exceptions.RequestException as e:
         st.error(f"Error de conexión con el chatbot: {e}")
         return [{"text": "❌ Error al conectar con el chatbot."}]
+    
+# Función auxiliar para convertir imagen a base64
+def bg_image_to_base64(image):
+        from io import BytesIO
+        import base64
+        
+        if image is None:
+            return ""
+            
+        buffered = BytesIO()
+        image.save(buffered, format="PNG")
+        return base64.b64encode(buffered.getvalue()).decode()
 
 
 # -----------------------------
@@ -158,82 +170,113 @@ if "opcion" not in st.session_state:
 
 if st.session_state.opcion == "🏠 Inicio":
     # Mostrar la imagen de fondo ocupando toda la pantalla
-    st.image('interfaz/revistas.png', use_container_width=True, output_format="PNG")
+    st.image('/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/revistas.png', use_container_width=True, output_format="PNG")
 
     # Mostrar el contenido dentro de una caja blanca con opacidad y centrado, encima de la imagen
-    st.markdown(
-        """
-        <style>
-            /* Estilo para la imagen de fondo */
-            .stImage > img {
-                position: fixed;  /* La imagen se fija al fondo de la pantalla */
-                top: 0;  /* La imagen comienza desde la parte superior */
-                left: 0;  /* La imagen comienza desde la parte izquierda */
-                width: 100vw;  /* La imagen ocupa el 100 del ancho de la ventana */
-                height: 100vh;  /* La imagen ocupa el 100 de la altura de la ventana */
-                object-fit: cover;  /* Ajusta la imagen para que cubra toda el área sin deformarse */
-                z-index: -1;  /* La imagen debe estar detrás del contenido */
-            }
 
+    # Configuración inicial (DEBE SER LA PRIMERA LÍNEA)
+    st.set_page_config(layout="wide")
 
+    # Cargar imagen (mejor práctica)
+    try:
+        bg_image = Image.open("interfaz/revistas.png")
+    except:
+        st.error("No se pudo cargar la imagen de fondo")
+        bg_image = None
 
-            /* Estilo para la caja blanca con opacidad */
-            .card {
-                background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco con opacidad */
-                padding: 30px; /* Espaciado interno */
-                border-radius: 10px; /* Bordes redondeados */
-                max-width: 1100px; /* Ancho máximo de la caja */
-                margin: 100px auto;  /* Centrado vertical y horizontal */
-                color: black; /* Color del texto */
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidad */
-                position: relative;  /* Posición */
-                z-index: 1;  /* La caja de texto debe estar encima de la imagen sin taparla */
-            }
+    # CSS personalizado
+    st.markdown("""
+    <style>
+        /* Reset completo para contenedores de Streamlit */
+        .main .block-container {
+            padding: 0 !important;
+            max-width: 100% !important;
+        }
+        
+        /* Contenedor de imagen personalizado */
+        .fullscreen-img-container {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            z-index: -2 !important;
+            overflow: hidden !important;
+        }
+        
+        /* Estilo para la imagen de fondo */
+        .fullscreen-img {
+            width: 100vw !important;
+            height: 100vh !important;
+            object-fit: cover !important;
+            display: block !important;
+        }
+        
+        /* Tarjeta de contenido */
+        .content-card {
+            background: rgba(255, 255, 255, 0.85) !important;
+            border-radius: 15px !important;
+            padding: 2.5rem !important;
+            margin: 3rem auto !important;
+            max-width: 1100px !important;
+            position: relative !important;
+            z-index: 1 !important;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
+        }
+        
+        /* Mejorar legibilidad del texto */
+        .content-card h2 {
+            color: #333 !important;
+            margin-top: 0 !important;
+        }
+        
+        .content-card ul {
+            line-height: 1.8 !important;
+        }
+        
+        .content-card code {
+            background: rgba(0,0,0,0.05) !important;
+            padding: 0.2em 0.4em !important;
+            border-radius: 3px !important;
+        }
+    </style>
+    """, unsafe_allow_html=True)
 
-            /* Estilo para el texto */
-            .card p, .card ul {
-                font-size: 16px;
-            }
-        </style>
+    # HTML para la estructura
+    st.markdown(f"""
+    <div class="fullscreen-img-container">
+        <img class="fullscreen-img" src="data:image/png;base64,{bg_image_to_base64(bg_image)}" alt="Fashion Background">
+    </div>
 
-        <div class="stImage">
-            <img src="interfaz/fondo.png">
-        </div>
+    <div class="content-card">
+        <h2>🛍️ Fashion Virtual Assistant</h2>
+        <p>Bienvenido/a al <strong>Asistente Virtual de Moda</strong>. Este proyecto combina inteligencia artificial con visión por computador y procesamiento del lenguaje natural para ofrecerte una experiencia interactiva en el mundo de la moda.</p>
 
-        <div class="card">
-            <h2>🛍️ Fashion Virtual Assistant</h2>
-            <p>Bienvenido/a al <strong>Asistente Virtual de Moda</strong>. Este proyecto combina
-            inteligencia artificial con visión por computador y procesamiento del lenguaje natural
-            para ofrecerte una experiencia interactiva en el mundo de la moda.</p>
+        <p>Aquí podrás:</p>
 
-            <p>Aquí podrás:</p>
-
-            <ul>
-            <li>👗 <strong>Chatear</strong> con un asistente virtual entrenado para hablar sobre estilos, prendas
-                y recomendaciones personalizadas.</li>
+        <ul>
+            <li>👗 <strong>Chatear</strong> con un asistente virtual entrenado para hablar sobre estilos, prendas y recomendaciones personalizadas.</li>
             <li>📸 <strong>Subir imágenes</strong> de ropa para recibir sugerencias de prendas similares.</li>
             <li>🔍 <strong>Visualizar un grafo de similitud</strong> que relaciona prendas según sus características visuales.</li>
-            </ul>
+        </ul>
 
-            <hr>
+        <hr>
 
-            <p><strong>¿Qué tecnologías usamos?</strong></p>
+        <p><strong>¿Qué tecnologías usamos?</strong></p>
 
-            <ul>
+        <ul>
             <li><code>Streamlit</code>: para crear esta interfaz web interactiva.</li>
             <li><code>TensorFlow</code>: para los modelos de clasificación y estilo.</li>
             <li><code>Rasa</code>: para el chatbot conversacional.</li>
-            <li><code>OpenCV</code> y <code>scikit‑learn</code>: para procesamiento de imágenes y similitud.</li>
+            <li><code>OpenCV</code> y <code>scikit-learn</code>: para procesamiento de imágenes y similitud.</li>
             <li><code>NetworkX</code>: para construir y visualizar relaciones entre prendas.</li>
-            </ul>
+        </ul>
 
-            <p>¡Explora las secciones del menú lateral y descubre cómo la inteligencia artificial puede transformar tu experiencia de moda!</p>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-
+        <p>¡Explora las secciones del menú lateral y descubre cómo la inteligencia artificial puede transformar tu experiencia de moda!</p>
+    </div>
+    """, unsafe_allow_html=True)
 
 
 elif st.session_state.opcion == "💬 Chatear con el bot":
