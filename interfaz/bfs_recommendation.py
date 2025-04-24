@@ -49,7 +49,7 @@ def cargar_grafo(ruta):
     with open(ruta, 'rb') as f:
         return pickle.load(f)
 
-def mostrar_nube_plotly(df, G, start_node=0, depth=2):
+def mostrar_nube_plotly(df, G, start_node=0, depth=2, nodo_destacado=None):
     """
     Visualiza el grafo de similitud usando Plotly con información al pasar el cursor
     """
@@ -82,17 +82,26 @@ def mostrar_nube_plotly(df, G, start_node=0, depth=2):
     node_x, node_y = [], []
     node_color, node_text = [], []
     node_classes, node_imgs = [], []
+    node_sizes = []
 
     color_map = {c: i for i, c in enumerate(df["clase"].unique())}
 
     for node in subgraph.nodes():
         x, y = pos[node]
-        node_x.append(x); node_y.append(y)
+        node_x.append(x)
+        node_y.append(y)
         clase = df.iloc[node]["clase"]
         node_classes.append(clase)
-        node_color.append(color_map[clase])
         node_text.append(clase)
         node_imgs.append(df.iloc[node]["ruta"])
+
+        # Destacar nodo
+        if node == nodo_destacado:
+            node_color.append('red')  # sobrescribe el colorscale para ese nodo
+            node_sizes.append(18)
+        else:
+            node_color.append(color_map[clase])
+            node_sizes.append(10)
 
     # Codificar imágenes
     encoded_imgs = []
@@ -106,25 +115,24 @@ def mostrar_nube_plotly(df, G, start_node=0, depth=2):
 
     node_trace = go.Scatter(
         x=node_x, y=node_y, mode="markers",
-        marker=dict(size=10, colorscale="Viridis", color=node_color, line_width=2),
+        marker=dict(size=node_sizes, color=node_color, colorscale="Viridis", line_width=2),
         text=node_text,
         hoverinfo="text",
         hovertemplate=(
             '<img src="data:image/png;base64,%{customdata[2]}" height="100px"><br>'
             '<b>Clase:</b> %{customdata[0]}<br>'
             '<b>ID:</b> %{customdata[1]}<extra></extra>'),
-        customdata=list(zip(node_classes, list(range(len(node_classes))), encoded_imgs))
+        customdata=list(zip(node_classes, list(subgraph.nodes()), encoded_imgs))
     )
 
     fig = go.Figure(data=[edge_trace, node_trace],
                     layout=go.Layout(
-                    title=dict(text="Grafo de Similitud entre Prendas", font=dict(size=16)),
-                    showlegend=False,
-                    hovermode="closest",
-                    margin=dict(b=20, l=5, r=5, t=40),
-                    xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
-                    yaxis=dict(showgrid=False, zeroline=False, showticklabels=False)
-                )
-                )
+                        title=dict(text="Grafo de Similitud entre Prendas", font=dict(size=16)),
+                        showlegend=False,
+                        hovermode="closest",
+                        margin=dict(b=20, l=5, r=5, t=40),
+                        xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+                        yaxis=dict(showgrid=False, zeroline=False, showticklabels=False)
+                    ))
 
     return fig

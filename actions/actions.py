@@ -69,3 +69,56 @@ class ActionSuggestClothingColor(Action):
 
         dispatcher.utter_message(text=suggestion)
         return []
+
+
+
+class ActionRecomendarPrendas(Action):
+    def name(self) -> Text:
+        return "action_recomendar_prendas"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        # Obtener slots de estilo y tipo de prenda
+        estilo = tracker.get_slot("style")
+        prenda = tracker.get_slot("clothing_item")
+
+        # Simulación del df si estás en entorno de prueba:
+        # from interfaz import df
+        import pandas as pd
+        import os
+
+        try:
+            # Cargar DataFrame real desde tu app si es necesario (aquí simplificado)
+            from interfaz.interfaz import df as global_df  # o ruta real
+            df = global_df.copy()
+        except:
+            # Backup en caso de fallo
+            df = pd.DataFrame({
+                "clase": ["vestido", "chaqueta", "pantalon", "zapatillas", "camiseta"],
+                "ruta": ["vestido.png", "chaqueta.png", "pant.png", "zap.png", "camiseta.png"],
+                "estilo": ["elegante", "urbano", "casual", "sport", "casual"]
+            })
+
+        # Filtrar por coincidencia si hay estilo o prenda
+        resultados = df.copy()
+        if estilo:
+            resultados = resultados[resultados["estilo"].str.lower().str.contains(estilo.lower())]
+        if prenda:
+            resultados = resultados[resultados["clase"].str.lower().str.contains(prenda.lower())]
+
+        resultados = resultados.reset_index()
+
+        if not resultados.empty:
+            dispatcher.utter_message(text="Aquí tienes algunas recomendaciones:")
+
+            # Enviar imágenes como JSON para que Streamlit las capture
+            for _, row in resultados.head(3).iterrows():
+                dispatcher.utter_message(json_message={
+                    "recomendacion_idx": int(row["index"])
+                })
+        else:
+            dispatcher.utter_message(text="No encontré ninguna prenda con ese estilo o tipo. ¿Querés probar otra búsqueda?")
+
+        return []

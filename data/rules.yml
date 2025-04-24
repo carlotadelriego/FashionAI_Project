@@ -46,3 +46,9 @@ rules:
   steps:
     - intent: ask_outfit_recommendation
     - action: utter_outfit_recommendation  
+
+
+- rule: Recomendar prendas según estilo o tipo
+  steps:
+    - intent: solicitar_recomendacion
+    - action: action_recomendar_prendas

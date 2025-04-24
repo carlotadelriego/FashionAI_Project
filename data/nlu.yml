@@ -87,3 +87,15 @@ nlu:
     - What size should I get for these [pants](clothing_item)?
     - Is this [jacket](clothing_item) available in [medium](size)?
     - What size is this [sweater](clothing_item)?
+
+- intent: solicitar_recomendacion
+  examples: |
+    - quiero algo [casual](style)
+    - necesito un [vestido](clothing_item) [elegante](style)
+    - dame una prenda [deportiva](style)
+    - me interesa un look [vintage](style)
+    - qué me recomiendas para un [evento informal](event)
+    - quiero un [traje](clothing_item) para una [boda](event)
+    - recomiéndame ropa [urbana](style)
+    - quiero algo cómodo y [casual](style)
+    - busco una [chaqueta](clothing_item)

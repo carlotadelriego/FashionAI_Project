@@ -17,6 +17,8 @@ intents:
   - ask_clothing_material
   - ask_clothing_price
   - nlu_fallback  # Intent for handling unrecognized messages
+  - solicitar_recomendacion
+
 
 entities:
   - color
@@ -93,6 +95,8 @@ actions:
   - utter_outfit_match
   - utter_style_suggestion
   - utter_clothing_size
+  - action_recomendar_prendas
+
 
 
 responses:
@@ -153,6 +157,9 @@ responses:
 
   utter_clothing_size:
     - text: "The available sizes are S, M, L, and XL. Which one do you prefer?"
+
+  utter_no_recommendation_found:
+  - text: "No encontré ninguna prenda que se ajuste a eso. ¿Querés que probemos otra cosa?"
 
 
 

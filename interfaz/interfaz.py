@@ -20,6 +20,8 @@ import sys
 from pathlib import Path
 sys.path.append('/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/bfs_recommendation.py')
 from bfs_recommendation import construir_grafo_similitud, bfs_recomendaciones, mostrar_nube_plotly
+from info_prendas import info_prendas
+
 
 
 # -----------------------------
@@ -112,18 +114,18 @@ df, fashion_model, style_model, X_features = cargar_modelos_y_datos()
 
 # Ejemplo de DataFrame con información de las prendas
 data = {
-    "clase": ["Accesorios", "Botas", "Vestido", "Tacón", "Sudadera", "Chaqueta", "Pantalones", "Camisetas", "Zapatillas", "Jersey", "Camiseta"],
+    "clase": ["Botas", "Camisas", "Camisetas", "Chaquetas", "Gorras", "Jerseis", "Pantalones", "Sudaderas", "Tacones", "Vestidos", "Zapatillas"],
     "ruta": ["/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/static/img/bota.png", 
-             "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/static/img/bota.png",
-             "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/static/img/vestido.png",
-             "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/static/img/tacon.png",
+             "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/static/img/camisa.png",
+             "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/static/img/camiseta.png",
+             "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/static/img/chaqueta.png",
+             "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/static/img/gorra.png",
+             "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/static/img/jersey.jpg",
+             "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/static/img/pantalon.png",
              "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/static/img/sudadera.png",
-             "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/static/img/chaqueta.jpg",
-             "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/static/img/pant.png",
-             "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/static/img/caisa.png",
-             "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/static/img/teni.png",
-             "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/static/img/jersey.png",
-             "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/static/img/cami.png"]
+             "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/static/img/tacon.png",
+             "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/static/img/vestido.png",
+             "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/static/img/zapatilla.png"]
 }
 df = pd.DataFrame(data)
 
@@ -300,36 +302,46 @@ if st.session_state.opcion == "🏠 Inicio":
     """, unsafe_allow_html=True)
 
 
+
 elif st.session_state.opcion == "💬 Chatear con el bot":
     st.markdown(
         """
         <style>
-        .pink-box
-        {
-        background:#ffe6f2;
-        padding:1.4rem 1.6rem;
-        border-radius:12px;
-        box-shadow:0 3px 8px rgba(0,0,0,0.08);
-        margin-top:1rem;
+        .pink-box {
+            background:#ffe6f2;
+            padding:1.4rem 1.6rem;
+            border-radius:12px;
+            box-shadow:0 3px 8px rgba(0,0,0,0.08);
+            margin-top:1rem;
         }
-        .pink-box p{margin:.35rem 0;font-weight:500;}
+        .pink-box p {
+            margin:.35rem 0;
+            font-weight:500;
+        }
         </style>
-        """, unsafe_allow_html=True
+        """,
+        unsafe_allow_html=True
     )
 
     st.markdown("## 💬 Chat con el Asistente Virtual de Moda")
 
-    # Abrimos la caja antes de TODOS los elementos
     st.markdown('<div class="pink-box">', unsafe_allow_html=True)
 
     user_input = st.text_input("Escribe tu mensaje:", key="chat_input")
+
     if st.button("Enviar") and user_input:
         respuestas = send_message_to_rasa(user_input)
         for r in respuestas:
-            st.markdown(f"<p>**🤖:** {r['text']}</p>", unsafe_allow_html=True)
+            if "text" in r:
+                st.markdown(f"<p><strong>🤖:</strong> {r['text']}</p>", unsafe_allow_html=True)
+            elif "recomendacion_idx" in r:
+                idx = r["recomendacion_idx"]
+                if idx < len(df):
+                    item = df.iloc[idx]
+                    st.image(item["ruta"], caption=item["clase"], use_container_width=True)
 
-    # Cerramos la caja
     st.markdown('</div>', unsafe_allow_html=True)
+
 
 
 
@@ -356,32 +368,85 @@ elif st.session_state.opcion == "🔗 Ver grafo de similitud":
     st.markdown("## 🔗 Grafo de Similitud entre Prendas")
     
     try:
-        st.write("✅ Datos cargados:", df.shape)
-        st.write("✅ Features shape:", features.shape)
-        
         top_k = st.slider("🔢 Número de conexiones por nodo (top_k)", 2, 10, 5)
-        nodo_inicio = st.number_input("🔍 Nodo inicial para subgrafo (opcional)", min_value=0, max_value=len(df)-1, step=1, value=0)
-        profundidad = st.slider("📏 Profundidad del subgrafo", 1, 3, 2)
 
+        # Asegurar que solo se usen imágenes válidas
+        df = df[df["ruta"].apply(os.path.exists)].reset_index(drop=True)
+        features = features[:len(df)]
+
+        # --------------------------
+        # 🔍 BÚSQUEDA DE PRENDA
+        # --------------------------
+        busqueda = st.text_input("🔍 Buscar una prenda por nombre (ej: Vestido, Bota, Chaqueta)", "")
+
+        # Normalización y búsqueda
+        busqueda_normalizada = busqueda.strip().lower().rstrip("s")
+        nodo_inicio = None
+        for idx, clase in enumerate(df["clase"]):
+            if clase.strip().lower().rstrip("s") == busqueda_normalizada:
+                nodo_inicio = idx
+                break
+
+        if nodo_inicio is None:
+            st.warning("❌ No se encontró ninguna prenda con ese nombre.")
+            nodo_inicio = 0
+        else:
+            st.success(f"📌 Mostrando grafo centrado en: **{df.iloc[nodo_inicio]['clase']}** (nodo {nodo_inicio})")
+
+        profundidad = st.slider("📏 Profundidad del subgrafo", 1, 3, 2)
         top_k = min(top_k, len(features))
-        
+
         st.write("🛠️ Construyendo grafo...")
         G = construir_grafo_similitud(df, features, top_k=top_k)
         st.write("✅ Grafo construido con", len(G.nodes), "nodos y", len(G.edges), "aristas")
 
-        st.write("📊 Mostrando grafo Plotly...")
-        fig = mostrar_nube_plotly(df, G, start_node=nodo_inicio, depth=profundidad)
+        # Pasar el nodo destacado para resaltarlo
+        fig = mostrar_nube_plotly(df, G, start_node=nodo_inicio, depth=profundidad, nodo_destacado=nodo_inicio)
         st.plotly_chart(fig, use_container_width=True)
 
         st.markdown("### 👕 Detalles de una prenda del grafo")
         nodo_id = st.selectbox("Selecciona un nodo del subgrafo:", options=list(G.nodes), index=0)
 
         if nodo_id is not None:
-            clase = df.iloc[nodo_id]["clase"]
+            clase_original = df.iloc[nodo_id]["clase"]
             ruta = df.iloc[nodo_id]["ruta"]
-            st.image(ruta, caption=f"Clase: {clase}", use_container_width=True)
-            st.write(f"🧵 Clase: **{clase}**")
+
+            clase_map = {
+                "botas": "bota",
+                "camisas": "camisa",
+                "camisetas": "camiseta",
+                "chaquetas": "chaqueta",
+                "gorras": "gorra",
+                "jerseys": "jersey",
+                "pantalones": "pantalon",
+                "sudaderas": "sudadera",
+                "tacones": "tacon",
+                "vestidos": "vestido",
+                "zapatillas": "zapatillas"
+            }
+
+            clase_normalizada = clase_map.get(clase_original.lower(), clase_original.lower().rstrip("s"))
+
+            info = info_prendas.get(clase_normalizada, {
+                "nombre": clase_original,
+                "precio": "Precio no disponible",
+                "color": "",
+                "referencia": "",
+                "descripcion": "Descripción no disponible.",
+                "url": "https://www.zara.com/"
+            })
+
+            col1, col2 = st.columns([1, 2])
+            with col1:
+                st.image(ruta, width=300)
+            with col2:
+                st.markdown(f"### {info['nombre']}")
+                st.markdown(f"**{info['precio']}**")
+                if info.get("color"):
+                    st.markdown(f"**Color:** {info['color']}  \n**Ref:** {info['referencia']}")
+                st.markdown("---")
+                st.markdown(info["descripcion"])
+                st.markdown(f"[🛒 Ver en tienda]({info['url']})", unsafe_allow_html=True)
 
     except Exception as e:
         st.error(f"❌ Error al generar el grafo: {e}")
-
