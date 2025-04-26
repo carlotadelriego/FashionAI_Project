@@ -88,23 +88,22 @@ nlu:
     - Is this [jacket](clothing_item) available in [medium](size)?
     - What size is this [sweater](clothing_item)?
 
-- intent: solicitar_recomendacion
+- intent: request_recommendation
   examples: |
-    - quiero algo [casual](style)
-    - necesito un [vestido](clothing_item) [elegante](style)
-    - dame una prenda [deportiva](style)
-    - me interesa un look [vintage](style)
-    - qué me recomiendas para un [evento informal](event)
-    - quiero un [traje](clothing_item) para una [boda](event)
-    - recomiéndame ropa [urbana](style)
-    - quiero algo cómodo y [casual](style)
-    - busco una [chaqueta](clothing_item)
+  - I want something [casual](style)
+  - I need an [dress](clothing_item) [elegant](style)
+  - Give me a [sporty](style)
+  - I'm interested in a [vintage](style) look
+  - What do you recommend for an [informal](event)
+  - I want a [suit](clothing_item) for a [wedding](event)
+  - Recommend some [urban](style) clothing
+  - I want something comfortable and [casual](style)
+  - I'm looking for a [jacket](clothing_item)
 
-
-- intent: solicitar_look_completo
+- intent: request_full_look
   examples: |
-    - Armame un look [casual](style)
-    - Quiero un outfit completo [elegante](style)
-    - Qué me pongo para una [cita](event)
-    - Necesito un conjunto [sport](style)
+  - Put together a [casual](style) look
+  - I want a complete [elegant](style) outfit
+  - What should I wear for a [date](event)
+  - I need a [sporty](style) outfit
 

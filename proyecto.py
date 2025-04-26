@@ -75,6 +75,8 @@ files_data = [
 ]
 
 
+
+
 ###### PREPROCESAMIENTO DEL TEXTO ######
 # Cargar el modelo de spaCy
 nlp = spacy.load("en_core_web_sm")
@@ -145,6 +147,7 @@ def analyze_trends(texts):
 
 trend_info = analyze_trends(processed_documents)
 print(trend_info) 
+
 
 
 # CREATE A DATAFRAME WITH THE PROCESSED TEXT

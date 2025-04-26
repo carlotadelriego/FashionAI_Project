@@ -167,21 +167,3 @@ def get_similar_items(uploaded_file):
         os.remove(temp_path)
         return df.iloc[bfs_indices], style_label
     return pd.DataFrame(), None
-
-# Interfaz Streamlit
-st.title("🧠 Fashion Recommendation System")
-uploaded_file = st.file_uploader("📤 Upload an image of a garment", type=["jpg", "png"])
-
-if uploaded_file:
-    img = Image.open(uploaded_file)
-    st.image(img, caption="Uploaded image", use_container_width=True)
-
-    st.write("🔎 Looking for similar clothes...")
-    similar_items, style_label = get_similar_items(uploaded_file)
-
-    style_dict = {0: "Casual", 1: "Formal", 2: "Deportivo", 3: "Elegante", 4: "Urbano"}
-    style_name = style_dict.get(style_label, "Desconocido")
-    st.write(f"🎨 Predicted style: **{style_name}**")
-
-    for _, item in similar_items.iterrows():
-        st.image(item['ruta'], caption=f"Recommended: {item['clase']}", use_container_width=True)

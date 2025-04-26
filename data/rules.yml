@@ -48,13 +48,13 @@ rules:
     - action: utter_outfit_recommendation  
 
 
-- rule: Recomendar prendas según estilo o tipo
+- rule: Recommend garments according to style or type
   steps:
-    - intent: solicitar_recomendacion
-    - action: action_recomendar_prendas
+    - intent: request_recommendation
+    - action: action_recommend_clothing
 
-- rule: Recomendar look completo
+- rule: Recommend full look
   steps:
-    - intent: solicitar_look_completo
-    - action: action_recomendar_look_completo
+    - intent: request_full_look
+    - action: action_recommend_look_complete
 
