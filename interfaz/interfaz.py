@@ -69,8 +69,8 @@ st.markdown("""
 # -----------------------------
 st.sidebar.title("Fashion Virtual Assistant")
 
-if st.sidebar.button("🏠 Zairi", key="sidebar_home"):
-    st.session_state.opcion = "🏠 Zairi"
+if st.sidebar.button("🛍️ Zairi", key="sidebar_home"):
+    st.session_state.opcion = "🛍️ Zairi"
 if st.sidebar.button("💬 Chat with the bot", key="sidebar_chat"):
     st.session_state.opcion = "💬 Chat with the bot"
 if st.sidebar.button("📸 Clothing Recommendation", key="sidebar_recommendation"):
@@ -162,84 +162,176 @@ def get_base64_image(path):
     with open(path, "rb") as f:
         return base64.b64encode(f.read()).decode()
 
-# -----------------------------
-# 🖼️ CARGA DE FONDO SOLO EN "INICIO"
-# -----------------------------
-if st.session_state.opcion == "🏠 Zairi":
-    background_path = "/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/dios.png"
-    background_image = get_base64_image(background_path)
-    
-    st.markdown(f"""
-        <style>
-        .background-img {{
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-image: url('data:image/png;base64,{background_image}');
-            background-size: cover;
-            background-position: center;
-            z-index: -1;
-        }}
-        </style>
-        <div class="background-img"></div>
-    """, unsafe_allow_html=True)
+def clear_chat_input():
+    st.session_state["chat_input_text"] = ""
 
-    st.markdown("""
-    <div class="welcome-box" style="
-        background-color: white;
+
+# -----------------------------
+# 🖼️ INTERFAZ - INICIO
+# ----------------------------
+# --- Cargar fondo
+def load_background(image_path):
+    with open(image_path, "rb") as image_file:
+        encoded = base64.b64encode(image_file.read()).decode()
+    page_bg_img = f"""
+    <style>
+    [data-testid="stAppViewContainer"] {{
+        background: url("data:image/png;base64,{encoded}") no-repeat center center fixed;
+        background-size: cover;
+    }}
+    [data-testid="stSidebar"] > div:first-child {{
+        background-color: rgba(255, 255, 255, 0.8);
+    }}
+    .main {{
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 2rem;
         border-radius: 20px;
-        padding: 3rem;
-        max-width: 900px;
-        margin: 8vh auto;
-        text-align: center;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    ">
-        <div style="font-size: 3rem; margin-bottom: 0.5rem;">Fashion Virtual Assistant</div>
-        <div style="font-size: 1.3rem; color: #555; margin-bottom: 1.5rem;">AI meets your style.</div>
-        <ul style="text-align: left; max-width: 600px; margin: auto; line-height: 1.6;">
-            <li>🤖 Chat with Zairi, your AI stylist.</li>
-            <li>📷 Upload your outfit and get style suggestions.</li>
-            <li>🧠 Discover connections between pieces.</li>
-        </ul>
-        <br/>
-    </div>
-    """, unsafe_allow_html=True)
+    }}
+    </style>
+    """
+    st.markdown(page_bg_img, unsafe_allow_html=True)
 
+
+
+# 🛍️ Inicio bonito
+if st.session_state.opcion == "🛍️ Zairi":
+    load_background("/Users/carlotafernandez/Desktop/Code/FashionAI_Project/interfaz/fondo_final.png")
+
+            # Caja central de bienvenida
+    st.markdown("""
+                <div style="
+                    background: white;
+                    padding: 3rem; 
+                    border-radius: 20px;
+                    box-shadow: 0 6px 30px rgba(0,0,0,0.15);
+                    max-width: 850px;
+                    margin: 6vh auto;
+                    text-align: center;
+                ">
+                    <h1 style="font-size: 3rem;">Fashion Virtual Assistant</h1>
+                    <p style="font-size: 1.3rem; color: #555;">AI meets your style.</p>
+                    <ul style="text-align: left; max-width: 600px; margin: 2rem auto; line-height: 1.8; font-size: 1.1rem;">
+                        <li>🤖 Chat with Zairi, your AI stylist.</li>
+                        <li>📷 Upload your outfit and get style suggestions.</li>
+                        <li>🧠 Discover connections between pieces.</li>
+                    </ul>
+                </div>
+                """, unsafe_allow_html=True)
+
+                # 🎛️ Opciones principales como botones grandes
+    st.markdown("<br><br>", unsafe_allow_html=True)
     col1, col2, col3 = st.columns(3)
+
     with col1:
         if st.button("💬 Chat with the bot", key="inicio_chat"):
             st.session_state.opcion = "💬 Chat with the bot"
+
     with col2:
-        if st.button("📸 Clothing Recommendation", key="inicio_recomendacion"):
+        if st.button("📸 Clothing Recommendation", key="inicio_recommendation"):
             st.session_state.opcion = "📸 Clothing Recommendation"
+
     with col3:
-        if st.button("🔗 Similarity graph", key="inicio_grafo"):
+        if st.button("🔗 Similarity Graph", key="inicio_graph"):
             st.session_state.opcion = "🔗 Similarity graph"
+    
+
+
 
 # -----------------------------
 # 💬 CHAT
 # -----------------------------
 elif st.session_state.opcion == "💬 Chat with the bot":
     st.markdown("## Chat with **Zairi** your virtual stylist 🤖✨")
+
+    # Estilos CSS para los chat bubbles
+    st.markdown("""
+        <style>
+        .chat-container {
+            margin-bottom: 10px;
+        }
+        .chat-bubble-user {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 80%;
+            margin-left: auto;
+            margin-right: 0;
+            text-align: left;
+        }
+        .chat-bubble-bot {
+            background-color: #ffe6f0;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 80%;
+            margin-right: auto;
+            margin-left: 0;
+            text-align: left;
+        }
+        .send-button-small {
+            height: 2 em;
+            padding: 0 1em;
+            font-size: 0.8em;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
+    # Mostrar historial de chat
     for speaker, text in st.session_state.chat_history:
         bubble_class = "chat-bubble-user" if speaker == "user" else "chat-bubble-bot"
         prefix = "" if speaker == "user" else "🤖 "
         st.markdown(f"<div class='chat-container'><div class='{bubble_class}'>{prefix}{text}</div></div>", unsafe_allow_html=True)
 
-    input_text = st.text_input("Type your message:", key="chat_input_text", placeholder="What should I wear to a party?")
-    send_button = st.button("Send")
+    # Añadir espacio entre historial y input
+    st.markdown("---")  # Línea separadora
+    st.markdown("<br>", unsafe_allow_html=True) 
 
-    if send_button and input_text.strip():
-        st.session_state.chat_history.append(("user", input_text.strip()))
+    # Detectar si hay que limpiar el input
+    if "clear_chat_input" in st.session_state and st.session_state.clear_chat_input:
+        st.session_state.chat_input_text = ""
+        st.session_state.clear_chat_input = False
+
+    # Input y botón en una fila
+    col1, col2 = st.columns([6, 1])
+
+    with col1:
+        user_input = st.text_input(
+            "Type your message:",
+            key="chat_input_text",
+            label_visibility="collapsed",
+            placeholder="What should I wear to a party?"
+        )
+
+    with col2:
+        send_button = st.button("Send!", key="send_button")  
+
+    # Aplicar estilo al botón después
+    st.markdown("""
+        <style>
+        button[data-testid="baseButton-send_button"] {
+            height: 2em !important;
+            padding: 0px 10px !important;
+            font-size: 14px !important;
+            line-height: 1em !important;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
+    if send_button and st.session_state.chat_input_text.strip():
+        input_text = st.session_state.chat_input_text.strip()
+        st.session_state.chat_history.append(("user", input_text))
+
         with st.spinner("Zairi is thinking..."):
-            response = send_message_to_rasa(input_text.strip())
+            response = send_message_to_rasa(input_text)
             for r in response:
                 if "text" in r:
                     st.session_state.chat_history.append(("bot", r["text"]))
-        st.session_state["chat_input_text"] = ""
+
+        st.session_state.clear_chat_input = True
         st.rerun()
+
+
+
+
 
 # -----------------------------
 # 📸 RECOMENDACIÓN POR IMAGEN
