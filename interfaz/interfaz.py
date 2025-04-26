@@ -250,24 +250,68 @@ elif st.session_state.opcion == "📸 Clothing Recommendation":
 
     if uploaded_file and uploaded_file.type in ["image/jpeg", "image/png", "image/jpg"]:
         st.write("🔍 Analyzing image...")
-        resultados, estilo = get_similar_items(uploaded_file)
+
+        # Mostrar la imagen que el usuario sube
+        st.image(uploaded_file, caption="🖼️ Your uploaded image", use_container_width=True)
+
+        resultados, estilo_detectado = get_similar_items(uploaded_file)
         estilos = {0: "Casual", 1: "Formal", 2: "Sportive", 3: "Elegant", 4: "Urban", 5: "Vintage"}
 
-        st.success(f"✨ Identified style: **{estilos.get(estilo, 'Unknown')}**")
-        st.write("### 🧥 Image-based recommendations:")
+        st.success(f"✨ Identified style: **{estilos.get(estilo_detectado, 'Unknown')}**")
 
         if not resultados.empty:
-            cols = st.columns(min(5, len(resultados)))
-            for i, (_, item) in enumerate(resultados.iterrows()):
-                ruta_imagen = item["ruta"]
-                if os.path.exists(ruta_imagen):
-                    with cols[i % len(cols)]:
-                        st.image(ruta_imagen, caption=item["class"], use_container_width=True)
+            # Detectar la prenda principal
+            clase_detectada = resultados.iloc[0]["class"].strip().lower().rstrip("s")  # Normalizar nombre
+
+            st.info(f"📌 Detected clothing item: **{clase_detectada}**")
+
+            # Definir combinaciones (todo singular normalizado)
+            combinaciones = {
+                "jacket": ["pant", "heel", "cap"],
+                "dress": ["heel", "sneaker", "cap"],
+                "shirt": ["pant", "sneaker"],
+                "t-shirt": ["sneaker", "pant"],
+                "sweater": ["pant", "sneaker"],
+                "pant": ["shirt", "t-shirt", "sweater"],
+                "sneaker": ["pant", "t-shirt"],
+                "heel": ["dress", "pant"],
+                "boot": ["pant", "jacket"],
+                "sweatshirt": ["pant", "sneaker"],
+                "cap": ["jacket", "t-shirt"],
+            }
+
+            # Buscar clases recomendadas
+            clases_recomendadas = combinaciones.get(clase_detectada.lower(), [])
+
+            if not clases_recomendadas:
+                st.warning("No complementary classes found for this item.")
+            else:
+                # Normalizar tu dataframe grande
+                df["clase_normalizada"] = df["class"].str.strip().str.lower().str.rstrip("s")
+
+                # Buscar recomendaciones reales en el Zara_dataset
+                recomendaciones = df[df["clase_normalizada"].isin(clases_recomendadas)]
+
+                if not recomendaciones.empty:
+                    n_recomendar = min(5, len(recomendaciones))
+                    recomendaciones = recomendaciones.sample(n=n_recomendar)
+
+                    st.write("### 🧥 Complementary recommendations for your outfit:")
+                    cols = st.columns(min(5, len(recomendaciones)))
+                    for i, (_, item) in enumerate(recomendaciones.iterrows()):
+                        ruta_imagen = item["ruta"]
+                        if os.path.exists(ruta_imagen):
+                            with cols[i % len(cols)]:
+                                st.image(ruta_imagen, caption=item["class"], use_container_width=True)
+                        else:
+                            with cols[i % len(cols)]:
+                                st.warning("Image not found.")
                 else:
-                    with cols[i % len(cols)]:
-                        st.warning("Image not found.")
+                    st.warning("No complementary recommendations found in the dataset.")
         else:
-            st.warning("No similar recommendations were found.")
+            st.warning("No similar item detected to recommend.")
+
+
 
 # -----------------------------
 # 🔗 GRAFO DE SIMILITUD
