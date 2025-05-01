@@ -16,9 +16,9 @@ import tempfile
 # Importar funciones necesarias
 from bfs_recommendation import construir_grafo_similitud, bfs_recomendaciones
 
-# Ruta del dataset y modelos
+# Rutas
 base_dir = '/Users/carlotafernandez/Desktop/Code/FashionAI_Project/data/zara_dataset'
-modelos_dir = '/Users/carlotafernandez/Desktop/Code/FashionAI_Project/modelos'  # Ruta a la carpeta 'modelos'
+modelos_dir = '/Users/carlotafernandez/Desktop/Code/FashionAI_Project/modelos'
 
 # Cargar datos
 data = []
@@ -30,7 +30,6 @@ for class_name in os.listdir(base_dir):
             if not filename.startswith("."):
                 data.append([file_path, class_name])
 
-# OJO aquí: ahora columna se llama "class"
 df = pd.DataFrame(data, columns=["ruta", "class"])
 df.to_csv("dataset.csv", index=False)
 print("✅ CSV dataset created successfully.")
@@ -49,31 +48,28 @@ for _, row in df.iterrows():
     if img is not None:
         processed_data.append([img, row["class"]])
 
-# Convertir los datos a numpy arrays
-X = np.array([x[0] for x in processed_data], dtype=np.float32)  
-y = np.array([x[1] for x in processed_data])
+X = np.array([x[0] for x in processed_data], dtype=np.float32)
+y_text = np.array([x[1] for x in processed_data])
 
 # Codificar etiquetas
 label_encoder = LabelEncoder()
-y = label_encoder.fit_transform(y)
-y = to_categorical(y)  
+y = label_encoder.fit_transform(y_text)
+y = to_categorical(y)
 
-# Cargar el modelo preentrenado de VGG16 desde la carpeta 'modelos'
+# Cargar modelos
 fashion_model_path = os.path.join(modelos_dir, 'fashion_model.h5')
 fashion_model = tf.keras.models.load_model(fashion_model_path)
 print("✅ Fashion model loaded successfully.")
 
-# Cargar las características previamente extraídas
 X_features_path = os.path.join(modelos_dir, 'X_features.npy')
 X_features = np.load(X_features_path)
 print("✅ Features loaded successfully.")
 
-# Cargar el modelo de clasificación de estilo (ResNet50)
 style_model_path = os.path.join(modelos_dir, 'style_model.h5')
 style_model = tf.keras.models.load_model(style_model_path)
 print("✅ Style model loaded successfully.")
 
-# Sistema de recomendación con SVD
+# Sistema de recomendación SVD
 user_ratings = pd.DataFrame({
     "user_id": [random.randint(1, 100) for _ in range(100)],
     "item_id": [random.randint(1, len(df)) for _ in range(100)],
@@ -81,12 +77,16 @@ user_ratings = pd.DataFrame({
 })
 
 reader = Reader(rating_scale=(1, 5))
-data = Dataset.load_from_df(user_ratings[["user_id", "item_id", "rating"]], reader)
+data_svd = Dataset.load_from_df(user_ratings[["user_id", "item_id", "rating"]], reader)
 svd_model = SVD()
-cross_validate(svd_model, data, cv=5)
-print("✅ Trained recommendation model.")
+svd_results = cross_validate(svd_model, data_svd, measures=['RMSE', 'MAE'], cv=5, verbose=False)
+avg_rmse = np.mean(svd_results['test_rmse'])
+avg_mae = np.mean(svd_results['test_mae'])
+print("✅ Sistema de recomendación SVD evaluado:")
+print(f"   RMSE promedio: {avg_rmse:.4f}")
+print(f"   MAE promedio: {avg_mae:.4f}")
 
-# Función para encontrar elementos similares
+# Función para encontrar elementos similares y predecir estilo
 def get_similar_items(uploaded_file):
     if not uploaded_file:
         return pd.DataFrame(), None
@@ -104,14 +104,17 @@ def get_similar_items(uploaded_file):
         img = cv2.resize(img, (224, 224)) / 255.0
         input_img = np.expand_dims(img, axis=0)
 
+        # Usar la penúltima capa del modelo de VGG16 para extracción de características
         extractor = models.Model(inputs=fashion_model.input, outputs=fashion_model.layers[-2].output)
         features = extractor.predict(input_img)
 
+        # Similaridad coseno con el dataset
         similarities = cosine_similarity(features, X_features)
         indices = np.argsort(similarities[0])[::-1]
         indices = [idx for idx in indices if idx < len(df)]
         indices = indices[:5]
 
+        # Predicción de estilo
         style_pred = style_model.predict(input_img)
         style_label = np.argmax(style_pred)
 
