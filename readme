@@ -49,9 +49,16 @@ pip install -r requirements.txt
 rasa train
 rasa shell
 rasa run --enable-api (con rasa run ya llegaría)
+rasa run actions
 
 # Para probar un modelo de predicción
-python proyecto.py
+python(3) dataset.py
+
+# Para entrenar modelos de NLP 
+python(3) proyecto.py
+
+# Para ejecutar la interfaz
+streamlit run interfaz.py
 
 
 ---
